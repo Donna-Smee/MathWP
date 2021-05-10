@@ -8,13 +8,14 @@
     flex-direction: row;
     justify-content: flex-end;
     background-color: rgb(214, 128, 240);
+    border-bottom: 1em black solid;
 
 }
 
 #header > div {
     margin: auto 0;
-    font-size: 2vw;
-    padding: 1.2em;
+    font-size: 1.8vw;
+    padding: 1em;
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     color: white;
@@ -40,7 +41,8 @@
 #title > h1{
     /*margin-left: 1em;*/
     padding: 0.5em 0;
-    padding-left: 0.5em;
+    /* padding-left: 0.5em;*/
+    padding-left: 0.8em;
     flex: 1;
     display: flex;
     justify-content: center;
@@ -51,12 +53,21 @@
 #arrow {
     height: 0.5em;
     width: auto;
+    overflow: hidden;
+}
+
+@keyframes slide {
+    0%   {transform: translateX(700%);}
+    100% {transform: translateX(-110%);}
 }
 
 #a {
     height: inherit;
-    width: 10%;
-    background-color: red;
+    width: 15%;
+    background-color: rgb(214, 128, 240);
+    animation-name: slide;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
 }
 
 
@@ -64,14 +75,9 @@
 #titlePic {
     flex: 4;
     background-color: black;
-    /*clip-path: polygon(0 0, 100% 0, 100% 100%);*/
     clip-path: polygon(0 120%, 100% 0, 100% 100%);
 }
 
-#title > img {
-    flex: 10;
-    width: 20%;
-}
 
 
 #getStarted {
@@ -119,14 +125,58 @@
     transition: 0.3s;
     width: 40%;
     padding: 1em;
+    z-index: 1;
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 10px 18px 0 rgba(0,0,0,0.2);
 }
 
 
-#newWS {
-    height: 500px;
+#showProduct {
+    position: relative;
+    background-color: rgb(214, 128, 240);
+    z-index: 2;
+    height: 1em;
+    width: 100%;
+    top: 2em;
+    border-top: 1em solid black;
+    margin: 0 auto;
+    animation-name: changeStrip1, changeStrip2;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
 
+
+@keyframes changeStrip1 {
+    0%   {background-color: black;}
+    50%  {background-color: rgb(214, 128, 240)}
+    100% {background-color: black;}
+}
+
+@keyframes changeStrip2 {
+    0%   {border-top: 1em solid rgb(214, 128, 240);}
+    50% {border-top: 1em solid black;}
+    100%   {border-top: 1em solid rgb(214, 128, 240);}
+}
+
+#divider {
+    position: relative;
+    bottom: 2em;
+    box-sizing: border-box;
+    width: 80%;
+    height: 30em;
+    z-index: -1;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: white;
+}
+
+#footer {
+    margin-top: 2em;
+    height: 3.5em;
+    background-color: black;
+    color: white;
+    padding-top: 2em;
+    text-align: center;
 }
