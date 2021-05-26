@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Checking
+    body 
+        if (page != null)
+            - var counter = 1;
+            each q in page.Questions
+                label(for=counter)= counter
+                input(id=counter name=counter type="text")
+                br
+                - counter++
+            
+            button(id="correct-but"  onclick="correction(this.value)" value=page.Questions data-value = termNum data1-value=page.Section data2-value=page.PageNum data3-value= page.workbookName) Check
+
+            
+         
+            script 
+                include ../public/correction.js

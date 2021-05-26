@@ -1,0 +1,39 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Grade
+        <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+        style
+            
+            include ../public/index.css
+            include ../public/mathWSGrade.css
+    body 
+        include ../partials/header
+        include ../partials/searchBar
+
+        h2#gradeTitle= "Math Worksheets 📝 Grade " + grade 
+        
+
+        div#viewAll
+            button#viewAllBut All Sections
+        #sections
+            div(onclick="getWorkSheets('number')" value=grade)#number 
+                p Number 
+            div(onclick="getWorkSheets('algebra')" value=grade)#algebra 
+                p Algebra 
+            div(onclick="getWorkSheets('data')" value=grade)#data 
+                p Data 
+            div(onclick="getWorkSheets('spacial')" value=grade)#spacial 
+                p Spacial Sense 
+            div(onclick="getWorkSheets('finance')" value=grade)#finance 
+                p Financial Literacy 
+
+        script 
+            include ../public/gettingWorksheets.js
+            
+

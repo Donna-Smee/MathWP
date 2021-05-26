@@ -1,0 +1,82 @@
+body {
+    font-family: "Varela Round", sans-serif;
+}
+
+#info-ws {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin: 0 auto;
+    
+}
+
+#text-info {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+
+}
+
+
+#previewImg {
+    max-width: 250px;
+    object-fit: contain;
+    border: 1px solid black;
+    margin: 2em;
+}
+
+#description {
+    margin: 1em;
+    max-height: 500px;
+    
+}
+
+#but-number {
+    background-color: #9b5de5;
+}
+
+#but-algebra {
+    background-color: #f15bb5;
+}
+
+#but-data {
+    background-color: #fee440;
+}
+
+#but-spacial {
+    background-color: #00bbf9;
+}
+
+#but-finance {
+    background-color: #00f5d4;
+}
+
+#info-ws-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 40%;
+    margin: 0 auto;
+    justify-content: center;
+    padding: 1.5em 0;
+    margin-bottom: 10em;
+}
+
+#info-ws-buttons > a {
+    text-decoration: none;
+    color: white;
+    width: 10em; 
+    text-align: center;   
+    margin: 0.2em;
+    padding: 1em 0.4em;
+}
+
+#but-algebra:hover{
+    background-color: #e23b9f;
+}
+
+/*do the following hover color effect for the rest of the sections later^*/

@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title correction selector
+    body 
+        div
+            label(for="workbook-name") Enter the workbook name:  
+            input(type="text" label="workbook-name" id="workbook-name")
+            
+        div
+            label(for="section-num") Enter the section number:  
+            input(type="text" label="section-num" id="section-num")
+        
+        div
+            label(for="page-num") Enter the page number:  
+            input(type="text" label="page-num" id="page-num")
+        
+        button(onclick="findPage()") hi
+
+
+        script 
+            include ../public/correction.js
+            

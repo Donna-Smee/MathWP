@@ -1,0 +1,28 @@
+#search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#searchInput {
+    padding: 0.5em;
+    width: 250px;
+    margin: 2px;
+}
+
+
+#searchBut {
+    padding: 0.5em;
+}
+
+
+#sectionSelect, #gradeSelect {
+    padding: 0.5em;
+    
+}
+
+
+
+#gradeInput {
+    padding: 0.5em;
+}

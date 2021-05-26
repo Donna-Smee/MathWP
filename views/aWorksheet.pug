@@ -1,0 +1,42 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title= Title
+
+        <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+        style
+            include ../public/aWorksheet.css
+            include ../public/index.css
+    body 
+        include ../partials/header
+        include ../partials/searchBar
+
+        if worksheet === null 
+            p Worksheet cannot be found.
+
+        else
+            #info-ws
+                img#previewImg(src=worksheet.PreviewPic, alt="")
+                #text-info
+                    h4#title-ws= worksheet.Title
+                    br
+                    p= "Grade: " + worksheet.Grade 
+                    p= "Section: " + worksheet.Section
+                    p#description= worksheet.Description
+
+            div#info-ws-buttons    
+                - let counter = 1
+                each link in worksheet.PDF 
+                    a(id="but-" + worksheet.Section href=link)= "Worksheet " + counter
+                    - counter++
+                
+           
+
+
+        script 
+            include ../public/gettingWorksheets.js

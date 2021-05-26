@@ -1,0 +1,43 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Add a Worksheet Type
+        <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
+
+        style 
+            include ../public/addWS.css
+
+    body 
+         
+        
+        #info
+            h2 Add a new worksheet type
+
+            input#title(type="text" placeholder="Enter Title")
+            
+            textarea#descript(type="text" placeholder="Enter description" rows="10" )
+            
+            input#image-link(type="text" placeholder="Enter preview picture link")
+            
+            input#grade(type="number" placeholder="Enter grade")
+            
+            input#section(type="text" placeholder="Enter section")
+
+            #pdfLinks    
+
+            input#pdfs(type="text" placeholder="Enter pdf links (worksheets)")
+            button#pdfAddBut(onclick="addLink()") Add worksheet pdf
+
+            br 
+            br  
+            br
+            br
+            button#addWSBut(onclick="checkValidInputWS()") Add WorkSheet Type
+
+            div#result
+    
+    script 
+        include ../public/addingItems.js

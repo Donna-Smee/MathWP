@@ -1,0 +1,57 @@
+body {
+    font-family: 'Quicksand', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+#info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input, textarea {
+    padding: 1em;
+    width: 40%;
+    margin: 1em;
+    overflow: auto;
+    font-size: 1em;
+    font-family: 'Quicksand', Arial, sans-serif;
+
+}
+
+
+
+
+#pdfAddBut, #addWSBut {
+    padding: 1.5em;
+    background-color: deeppink;
+    color: white;
+    border: none;
+}
+
+#addWSBut{
+    font-size: 1.5em;
+    margin-bottom: 1em;;
+}
+
+#pdfAddBut:hover {
+    background-color: deepskyblue;
+}
+
+#addWSBut:hover {
+    background-color: rgb(195, 0, 255)
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+
+#pdfLinks {
+    display: flex;
+    flex-direction: column;
+}
+
+
+

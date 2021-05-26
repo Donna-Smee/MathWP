@@ -1,0 +1,46 @@
+
+
+#grades {
+    text-align: center;
+    width: 50%;
+    min-height: 500px;
+    margin: 0 auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-family: 'Oswald', sans-serif;
+    align-items: center;
+}
+
+#grades > a{
+    width:fit-content;
+    border: 2px solid black;
+    padding: 1.2em 4.2em;
+    margin: 0.5em;
+    transition: padding 0.2s;
+    font-size: 1.4vw;
+    text-decoration: none;
+    color: black;
+}
+
+#grades > a:hover{
+    cursor: pointer;
+    border: 2px solid rgb(214, 128, 240);
+    padding: 1.4em 4.4em;
+}
+
+#header {
+    position: relative;
+    
+}
+
+/*#wb {
+    position: absolute;
+    right: 10px;
+    border: 1px solid black;
+    top: 50%;
+}
+*/
+

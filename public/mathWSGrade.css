@@ -1,0 +1,105 @@
+body {
+    font-family: 'Varela Round', sans-serif;
+}
+
+#gradeTitle {
+    text-align: center;
+    margin-top: 3em;
+    margin-bottom: 1.5em;
+}
+
+#sections {
+    display: flex;
+    flex-direction: row;
+    height: 60vh;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+    color: white;
+}
+
+#number {
+    flex: 1;
+    background-color: #9b5de5;
+}
+
+#algebra {
+    flex: 1;
+    background-color: #f15bb5;
+}
+
+#data {
+    flex: 1;
+    background-color: #fee440;
+}
+
+#spacial {
+    flex: 1;
+    background-color: #00bbf9;
+}
+
+#finance {
+    flex: 1;
+    background-color: #00f5d4;
+}
+
+
+#sections > div {
+    height: 55vh;
+    margin: 0.5em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+    color: white;
+}
+
+#sections >div:hover {
+    border-bottom: 0.5em black solid;
+    padding: 0.3em;
+    
+}
+
+/* hover */
+#number:hover, #alegra:hover {
+    cursor: pointer;
+    /*background-color: #843adf;*/
+ 
+}
+
+#algebra:hover {
+    cursor: pointer;
+    /*background-color: #ed2ca0;*/
+    
+}
+
+#data:hover {
+    cursor: pointer;
+   /* background-color: #e4c601;*/
+}
+
+#spacial:hover {
+    cursor: pointer;
+   /* background-color: #0099cc;*/
+}
+
+#finance:hover {
+    cursor: pointer;
+  /*  background-color: #00ccb1;*/
+}
+
+#viewAll {
+    display: flex;
+    justify-content: center;
+}
+
+#viewAllBut{
+    background-color: white;    
+    padding: 1.5em;
+}
+
+#viewAllBut:hover {
+    cursor: pointer;
+    background-color: cornsilk;
+}
