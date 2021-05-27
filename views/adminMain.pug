@@ -5,9 +5,22 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Admin Home
+        style 
+            include ../public/admin.css
     body 
         a(href="/admin/createWorksheet") Create a New WorkSheet
+        br
+        a(href="") Alter a Worksheet
+        br
+        a(href="") Delete a Worksheet 
+        br
+        br
+        a(href="") Create a product 
+        br
+        a(href="") Alter a product 
+        br
+        a(href="") Delete a product  
 
         br
         br
-        a(href="/admin/log") See the logs 
+        a#logs(href="/admin/log") See the logs 

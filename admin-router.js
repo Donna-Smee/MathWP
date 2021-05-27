@@ -7,8 +7,9 @@ const bcrypt = require('bcrypt');
 
 const Admin = require("./AdminModel");
 const Worksheet = require("./WorksheetModel");
+const Log = require("./LogModel");
 
-router.post("/login", login);
+router.post("/login", login, logDate, loadHome);
 router.get("/logout", logout);
 router.get("/home", auth, admin);
 
@@ -17,8 +18,11 @@ router.get("/createWorksheet", auth, loadCreateWSPage);
 router.get("/checkExistTitle", auth, checkExistTitle);
 router.post("/saveNewWS", saveNewWS);
 
-
-
+router.get("/log/all", auth, loadLogAll);
+router.get("/log", auth, loadLog);
+router.post("/log/year/month", auth, loadLogMonthYear);
+router.post("/log/month", auth, loadLogMonth);
+router.post("/log/year", auth, loadLogYear);
 
 
 router.get("/:sc",  loadAdminLoginPage);
@@ -77,15 +81,48 @@ async function login(req, res, next){
                     return;
                 }
                 req.session.loggedIn = true;
-                res.status(200).render("../views/adminMain");
+                next();
+                //res.status(200).render("../views/adminMain");
             }else {
-                res.send("Not allowed.");   
+                res.send("Not allowed."); 
+                return;  
             }
         } catch {
             res.status(500).send();
+            return;
         }
         
     });
+}
+
+
+
+function logDate(req, res, next){
+    let d = new Date();
+    let log = new Log();
+    log.Date = d;
+    log.Day = d.getDate();
+    log.Month = d.getMonth() + 1;
+    log.Year = d.getFullYear();
+
+    log.save(function(err, result){
+        if (err){
+            res.status(500).send("There was an error... nopes. Please login again.");
+            req.session.loggedIn = false;
+            return;
+        }
+        console.log("logged in Date: " + result);
+        next();
+    });
+}
+
+
+
+function loadHome(req, res, next){
+    if (req.session.loggedIn){
+        res.status(200).render("../views/adminMain");
+        return;
+    }
 }
 
 
@@ -149,6 +186,63 @@ function saveNewWS(req, res, next){
     });
 }
 
+function loadLogAll(req, res, next){
+    console.log("limit nothing, allll");
+    Log.find().sort({Date: -1}).exec(function(err, results){
+        if (err){
+            res.status(500).send("error loading logs");
+            return;
+        }
+        res.status(200).render("../views/log", {logs: results});
+    });
+    
+}
 
+function loadLog(req, res, next){
+    Log.find().sort({Date: -1}).limit(parseInt(req.query.limit)).exec(function(err, results){
+        if (err){
+            res.status(500).send("error loading logs");
+            return;
+        }
+        res.status(200).render("../views/log", {logs: results});
+    });
+    
+}
+
+
+function loadLogMonth(req, res, next){
+    Log.find().where("Month").equals(req.body.month).sort({Date: -1}).limit(parseInt(req.body.limit)).exec(function(err, results){
+        if (err){
+            res.status(500).send("error loading logs");
+            return;
+        }
+        res.status(200).render("../views/log", {logs: results});
+    });
+}
+
+
+function loadLogYear(req, res, next){
+    Log.find().where("Year").equals(req.body.year).sort({Date: -1}).limit(parseInt(req.body.limit)).exec(function(err, results){
+        if (err){
+            res.status(500).send("error loading logs");
+            return;
+        }
+        res.status(200).render("../views/log", {logs: results});
+    });
+}
+
+
+function loadLogMonthYear(req, res, next){
+    Log.find()
+    .where("Year").equals(req.body.year)
+    .where("Month").equals(req.body.month)
+    .sort({Date: -1}).limit(parseInt(req.body.limit)).exec(function(err, results){
+        if (err){
+            res.status(500).send("error loading logs");
+            return;
+        }
+        res.status(200).render("../views/log", {logs: results});
+    });
+}
 
 module.exports = router;

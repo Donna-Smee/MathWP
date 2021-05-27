@@ -6,8 +6,7 @@ let adminSchema = Schema({
     Password: {type: String, required: true},
     SecretKey: {type: String, required: true},
     SquareS: [Number],
-    Locked: {type: Boolean, required: true},
-    Log: []
+    Locked: {type: Boolean, required: true}
 });
 
 

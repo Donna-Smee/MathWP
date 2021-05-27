@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Log
+    body 
+        select#month(name="month")
+            option(value="") Select a month
+            option(value=1) 1
+            option(value=2) 2 
+            option(value=3) 3 
+            option(value=4) 4    
+            option(value=5) 5
+            option(value=6) 6
+            option(value=7) 7
+            option(value=8) 8 
+            option(value=9) 9 
+            option(value=10) 10    
+            option(value=11) 11
+            option(value=12) 12
+        
+        input#year(type="number" placeholder="Enter a year")
+        br
+        br
+        button(value=5 onclick="loadLogs(5)") see 50
+        button(value=10 onclick="loadLogs(10)") see 100
+        button(value=50 onclick="loadLogs(50)") see 500
+        a(value="all" href="/admin/log") see all
+
+        
+        each i in logs 
+            p= i.Date
+    
+    script 
+        include ../public/log.js
