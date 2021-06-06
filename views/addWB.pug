@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Add a WB
+        <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
+        style 
+            include ../public/addWS.css
+    body 
+        #info 
+            h2 Add a new workbook
+
+            input#title(placeholder="Enter title")
+            input#price(type="Number" placeholder="Enter price")
+            input#format(placeholder="Enter format as an array [2, 3, ...]")
+            textarea#shortD(type="text" placeholder="Enter the short description", rows="10")
+            textarea#fullD(type="text" placeholder="Enter the full/long description", rows="10")
+            textarea#allD(name="allD", rows="10" placeholder="Enter the ALL description (used to search)")
+            textarea#previewPics(name="previewPics", rows="10" placeholder="Enter preview pics in array [blahblah.jpg, blahblahblah.png]")
+            textarea#pageNums(name="pageNums", rows="10", placeholder="Enter page numbers in array [1, 2, ...]")
+            input#subject(placeholder="Enter subject")
+            input#grade(placeholder="Enter grade(s) as a string (grades are separated by commas) '1,2...'")
+
+            button#addWB-but(onclick="checkInputs()") Create
+    
+    script 
+        include ../public/addWB.js
+
+

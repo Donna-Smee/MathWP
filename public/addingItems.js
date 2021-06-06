@@ -1,4 +1,4 @@
-let wsLinks = ["https://learningresources312574283.files.wordpress.com/2021/05/comp2406-w21-t10.pdf", "https://learningresources312574283.files.wordpress.com/2021/05/comp2406-w21-t10.pdf"];
+let wsLinks = [];
 
 
 function addLink(){

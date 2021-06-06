@@ -1,5 +1,5 @@
 function findPage(){
-    let wbName = document.getElementById("workbook-name").value.trim();
+    let wbName = document.getElementById("workbook-name").value.trim().toLowerCase();
     let sectNum = document.getElementById("section-num").value.trim();
     let pageNum = document.getElementById("page-num").value.trim();
 

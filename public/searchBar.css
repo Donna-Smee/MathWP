@@ -23,6 +23,34 @@
 
 
 
-#gradeInput {
-    padding: 0.5em;
+
+@media (max-width: 480px){
+    #search {
+        flex-direction: column;
+        margin: 0.5em;
+        width: 90%;
+        background-color: pink;
+    }
+
+    #filter-selections{
+        display: flex;
+        flex-direction: row;
+
+    }
+
+    #searchSelect, #gradeSelect {
+        flex: 1;   
+    }
+
+    #searchInput {
+        margin: 0;
+        
+    }
+
+
+
+    #filter-selections, #searchInput, #searchBut {
+        width: inherit;
+        
+    }
 }

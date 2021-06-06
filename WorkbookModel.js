@@ -3,14 +3,18 @@ const Schema = mongoose.Schema;
 
 let workbookSchema = Schema({
     Title: {type: String, required: true},
+    LowerTitle: {type: String, required: true},
     Price: {type: Number, required: true},
     Format:[mongoose.Schema.Types.Mixed],
-    PrizeCode: {type: String},
     ShortDescription: {type: String},
     Description: {type: String},
-    PreviewPics: {data: Buffer, contentType: String},
+    AllDescript: {type: String, required: true},
+    CoverPic: {type: String},
+    PreviewPics: [mongoose.Schema.Types.Mixed],
     PageNumbers: [mongoose.Schema.Types.Mixed],
-    PrizeCodes: [mongoose.Schema.Types.Mixed]
+    PrizeCodes: [mongoose.Schema.Types.Mixed],
+    Subject: {type: String},
+    Grade: {type:String}
 });
 
 

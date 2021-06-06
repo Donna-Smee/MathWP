@@ -11,7 +11,8 @@ router.get("/", getTermAmount, getPage);
 
 
 function getTermAmount(req, res, next){
-    Workbook.findOne().where("Title").equals(req.query.wbName).exec(function(err, result){
+    console.log(req.query.wbName)
+    Workbook.findOne().where("LowerTitle").equals(req.query.wbName).exec(function(err, result){
         if (err){
             console.log(err);
             return;

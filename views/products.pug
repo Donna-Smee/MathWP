@@ -1,0 +1,50 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Workbooks
+        <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+        <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet" type='text/css'>
+        style
+            
+            include ../public/index.css
+            include ../public/mathWSGeneral.css
+            include ../public/products.css
+    body 
+
+        include ../partials/header
+        // the search bar
+        input#searchInput(placeholder="Search for workbooks")
+        input#subject(placeholder="Subject")
+        input#grade(placeholder="Grade")
+
+        button#searchWB-But(onclick="getWBs()") Search
+
+        #productsDisplay 
+            if (workbooks != null)
+                #products 
+                    each wb in workbooks
+                        .workbook 
+                            img(class="productImg" src=wb.PreviewPics[0], alt="")
+                            p.wbTitle= wb.Title
+                            .info-prod
+                                 
+                                .text-info
+                                    p.wbPrice= wb.Price
+                                    //pre #{wb.ShortDescription}
+                                a.add-cart-but(href="https://google.com") Add to Cart
+                                     
+
+                            
+
+
+                    
+
+    
+    script 
+        include ../public/gettingWorkbooks.js

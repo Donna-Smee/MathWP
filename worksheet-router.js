@@ -224,6 +224,7 @@ function loadWS(req, res, next){
 
 
 function respondWS(req, res, next){
+    
 	
 	res.format({
 		"text/html": () => {res.render("../views/worksheetTypes", {worksheets: res.worksheets, qstring: req.qstring, current: req.query.page, more: res.more})},

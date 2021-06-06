@@ -23,14 +23,14 @@ input, textarea {
 
 
 
-#pdfAddBut, #addWSBut {
+#pdfAddBut, #addWSBut, #addWB-but {
     padding: 1.5em;
     background-color: deeppink;
     color: white;
     border: none;
 }
 
-#addWSBut{
+#addWSBut, #addWB-but{
     font-size: 1.5em;
     margin-bottom: 1em;;
 }

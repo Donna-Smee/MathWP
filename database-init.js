@@ -176,11 +176,15 @@ db.once('open', function() {
         // load format
         let newWB = new Workbook();
         newWB.Title = "math work book";
+        newWB.LowerTitle = newWB.Title.toLowerCase();
         newWB.Price = 4.99;
         newWB.Format = format;
-        newWB.PreviewPics.data = fs.readFileSync(picPath);
-        newWB.PreviewPics.contentType = 'image/jpg';   
+        newWB.PreviewPics = ["https://i.ibb.co/6sLp4yb/wsPic.jpg", "https://i.ibb.co/6sLp4yb/wsPic.jpg"];
+        newWB.CoverPic = "https://i.ibb.co/6sLp4yb/wsPic.jpg"; 
         newWB.PageNumbers = pageNums;  
+        newWB.Subject = "math";
+        newWB.Grade = "1,3";
+        newWB.AllDescript = "Grade 1, Grade 3, math work book, this is an addition work book";
 
         // generate array of prize codes (one for each section)
         newWB.PrizeCodes = prizeCodeArrGen(pageNums);
