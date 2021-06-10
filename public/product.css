@@ -1,0 +1,159 @@
+body,pre {
+    font-family: 'Roboto', 'Varela Round', sans-serif;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+
+#cartStatus {
+    background-color: black;
+    color: white;
+    width: fit-content;
+    padding: 1em;   
+    float: right;
+    position: sticky;
+    top: 20px;
+    right: 0;
+}
+
+
+#productTitle {
+    text-align: center;
+    margin-bottom: 1em;
+    text-transform: uppercase;
+    padding-bottom: 0.7em;
+    border-bottom: 0.09em solid black;
+}
+
+#productContainer {
+    margin: 0 auto;
+    margin-top: 4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+}
+
+
+#rightSide {
+    flex: 1.5;
+    margin-left: 4em;
+    padding: 1em;
+    max-width: inherit;
+}
+
+
+
+#productImage {
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+}
+
+#price {
+    margin-top: 1em;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.3em;
+}
+
+#leftSide {
+    flex: 1;
+    
+}
+
+
+#addCart {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2em;
+}
+
+
+#itemNumController {
+    flex: 1.5;
+    display: flex;
+    flex-direction: row;
+    
+}
+
+
+#addCartButton {
+    box-sizing: border-box;
+    flex: 1;
+    background-color: #70db70;
+    margin-left: 1.2em;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 0.4em; 
+
+    outline: none;
+    border: none;
+    font-size:medium;
+    text-decoration: none;
+}
+
+
+#addCartButton:hover{
+    background-color: #50bd50;
+}
+
+#minusItem, #plusItem {
+    flex: 1;
+    font-size: 1.3vw;
+    padding: 0.4em;
+    text-align: center;
+    background-color: #cccccc;
+    cursor: pointer;
+}
+
+
+#minusItem:hover, #plusItem:hover{
+    background-color: #a8a8a8;
+}
+
+
+
+
+#valueItem {
+    flex: 1.4;
+    text-align: center;
+    font-size: 1.3vw;
+    padding: 0.4em;
+}
+
+
+#sampleTitle {
+    font-size: 1.2vw;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
+
+
+#samples {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 300px;
+
+}
+
+.sample {
+    color: black;
+    margin-bottom: 0.3em;
+}
+
+
+
+
+*.unselectable {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+ }

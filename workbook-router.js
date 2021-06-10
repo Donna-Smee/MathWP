@@ -14,6 +14,9 @@ router.get("/", loadWB);
 router.get("/", respondWB);
 
 
+router.get("/:wbID", getWorkbook);
+
+
 
 function queryParser(req, res, next){
     const MAX_WORKSHEETS = 50;
@@ -177,6 +180,22 @@ function getCode(req, res, next){
     })
 }
 
+
+
+function getWorkbook(req, res, next){
+    Workbook.findOne().where("_id").equals(ObjectId(req.params.wbID)).exec(function(err, result){
+        if (err){
+            res.status(500).send("Error accessing workbook.");
+            return;
+        }
+        if (result != null){
+            res.render("product", {product: result});
+            res.end();
+        }else {
+            res.send("Workbook is not found.");
+        }
+    });
+}
 
 
 

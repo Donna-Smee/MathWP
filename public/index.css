@@ -24,8 +24,23 @@
 
 }
 
-#header > a:hover {
+
+
+
+#cart-icon {
+    transition-duration: 0.2s;
+}
+
+
+
+.tab:hover {
     background-color: rgb(153, 53, 184);
+}
+
+#cart-icon:hover {
+    transform: translateY(-5%);
+    color: black;
+    
 }
 
 #title {

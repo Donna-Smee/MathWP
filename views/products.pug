@@ -8,16 +8,20 @@ html(lang="en")
         <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
         <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
         <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"  rel="stylesheet" type='text/css'>
         style
             
             include ../public/index.css
             include ../public/mathWSGeneral.css
+            
             include ../public/products.css
+            include ../public/product.css
+            
     body 
-
         include ../partials/header
+        #cartStatus Items in Cart: 0 
         // the search bar
         input#searchInput(placeholder="Search for workbooks")
         input#subject(placeholder="Subject")
@@ -30,14 +34,14 @@ html(lang="en")
                 #products 
                     each wb in workbooks
                         .workbook 
-                            img(class="productImg" src=wb.PreviewPics[0], alt="")
-                            p.wbTitle= wb.Title
+                            <a href="/workbooks/#{wb._id}"><img class="productImg" src=#{wb.PreviewPics[0]} alt=""></a>
+                            a.wbTitle(href="/workbooks/" + wb._id)= wb.Title
                             .info-prod
                                  
                                 .text-info
-                                    p.wbPrice= wb.Price
+                                    p.wbPrice= "$" + wb.Price
                                     //pre #{wb.ShortDescription}
-                                a.add-cart-but(href="https://google.com") Add to Cart
+                                button.add-cart-but(onclick="addToCart(this.value, 1)" value=wb._id) Add to Cart
                                      
 
                             
@@ -48,3 +52,4 @@ html(lang="en")
     
     script 
         include ../public/gettingWorkbooks.js
+        include ../public/product-cart.js

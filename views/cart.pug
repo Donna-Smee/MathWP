@@ -1,0 +1,79 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Your Cart
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        style
+            
+            include ../public/index.css
+            include ../public/cart.css
+    body 
+
+        #cart-info
+            #cart-items 
+                if (products != null)
+                    -let counter = 0
+                    -let tot = products.length
+                    each pd in products 
+                        -let theID = "amount" + pd.prod
+                        -counter++
+                        if (counter != tot)
+                            .each-prod
+                                .deleteButContainer
+                                    button.deleteButton(value=pd.prod onclick="deleteFromCart(this.value)") &times;
+                                img.pImg(src=pd.pic, alt=pd.Title + "image")
+                                .titlePrice
+                                    p.pTitle= pd.title
+                                    p.pPrice= "$" + pd.price + " each"
+                                .itemNumController
+                                    .minusItem(class="unselectable" onclick="updateCart(this.id, -1)" id=pd.prod) −
+                                    .valueItem(id=theID)= pd.amount
+                                    .plusItem(onclick="updateCart(this.id, 1)" class="unselectable" id=pd.prod) +
+                                p.pTotal= "$" + pd.total
+                        else 
+                            .each-prod-last
+                                .deleteButContainer
+                                    button.deleteButton(value=pd.prod onclick="deleteFromCart(this.value)") &times;
+                                img.pImg(src=pd.pic, alt=pd.Title + "image")
+                                .titlePrice
+                                    p.pTitle= pd.title
+                                    p.pPrice= "$" + pd.price + " each"
+                                .itemNumController
+                                    .minusItem(onclick="updateCart(this.id, -1)" class="unselectable" id=pd.prod) −
+                                    .valueItem(id=theID)= pd.amount
+                                    .plusItem(onclick="updateCart(this.id, 1)" class="unselectable" id=pd.prod) +
+                                p.pTotal= "$" + pd.total
+                        
+
+                            
+                                
+                            
+                            
+                            
+
+            #total-discount    
+                #total
+                    h4#total-heading The Total Amount:  
+                    -let allTotal = 0
+                    if (products != null)
+                        each pd in products 
+                            -allTotal += pd.total
+
+                    h6#sub-total-h= "SUBTOTAL " + allTotal
+                    h6#total-h= "TOTAL " + allTotal
+
+                    button#toCheckoutBut Proceed To Checkout
+
+                #coupon 
+                    input(type="text" placeholder="Promo code")
+                    button#promoBut Apply 
+
+    script 
+        include ../public/product-cart.js
+
+
+
+            

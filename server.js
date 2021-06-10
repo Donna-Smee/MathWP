@@ -19,6 +19,9 @@ app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'pug');
 app.use(express.static("public"));
 
+
+
+
 mongoose.connect('mongodb://localhost/eeWB', {useNewUrlParser: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -35,6 +38,10 @@ app.use("/worksheets", worksheetRouter);
 
 let adminRouter = require("./admin-router");
 app.use("/admin", adminRouter);
+
+
+let cartRouter = require("./cart-router");
+app.use("/cart", cartRouter);
 
 db.once('open', function(){
     https.createServer({
@@ -59,7 +66,6 @@ app.get("/generalMathWS", function(req, res, next){
     res.render("../views/mathWSGeneral");
 });
 
-//app.get("")
 
 
 // individual grade page
@@ -82,6 +88,12 @@ app.get("/gradePage/:grade", function(req, res, next){
 app.get("/products", function(req, res, next){
     res.render("../views/products");
 });
+
+
+
+
+
+
 
 
 
