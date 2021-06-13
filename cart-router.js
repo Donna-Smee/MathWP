@@ -19,14 +19,15 @@ router.put("/removeFromCart", cartCheck, removeFromCart);
 function loadCartPage(req, res, next){
 
     if (!req.session.carts){
-        res.status(401).send("You dont have any items in your cart yet.");
+        res.status(401).render("../views/cart", {products: null, totalAll: 0, totCart: req.session.totCart});
         return;
     }
 
 
 
     console.log("loading cart page");
-    res.status(200).render("../views/cart", {products: req.session.carts});   
+    getTotalPriceAll(req, res, next);
+    res.status(200).render("../views/cart", {products: req.session.carts, totalAll: req.session.allTot, totCart: req.session.totCart});   
 }
 
 
@@ -37,6 +38,7 @@ function cartCheck(req, res, next){
     if (!req.session.carts){
         console.log("starting a newwwwwwwwwwww cart.");
         req.session.carts = [];
+        req.session.allTot = 0;
     }
 
     next();
@@ -77,7 +79,8 @@ function addToCart(req, res, next){
            let added = increaseProd(prod, parseInt(amount), req.session.carts);
             if (added){
                 req.session.carts = added;
-                res.status(200).render("../views/cart", {products: req.session.carts});
+                getTotalPriceAll(req, res, next);
+                res.status(200).render("../views/cart", {products: req.session.carts, totalAll: req.session.allTot, totCart: req.session.totCart});
                 console.log("this is cart ahahahhahahah: " + req.session.carts);
                 
                 return;
@@ -94,12 +97,13 @@ function addToCart(req, res, next){
                 title: result.Title,
                 pic: result.PreviewPics[0],
                 price: parseFloat(result.Price),
-                total: (parseFloat(result.Price) * amount).toFixed(2)
+                total: (Math.round(parseFloat(result.Price) * amount *100) /100).toFixed(2)
 
             });
             console.log("pushed");
             console.log("this is cart: " + req.session.carts);
-            res.status(200).send("true");
+            getTotalPriceAll(req, res, next);
+            res.status(200).render("../views/cart", {products: req.session.carts, totalAll: req.session.allTot, totCart: req.session.totCart});
        }
        
     });
@@ -125,7 +129,7 @@ function increaseProd(obj, num, arr){
     for (let i = 0; i < arr.length; i++){
         if (arr[i].prod === obj){
             arr[i].amount += num;
-            arr[i].total = (arr[i].amount * arr[i].price);
+            arr[i].total = (Math.round(arr[i].amount * arr[i].price *100) /100).toFixed(2);
             console.log("added the previous in.");
             return arr;
         }
@@ -154,9 +158,10 @@ function removeFromCart(req, res, next){
        if (isInCart(prod, req.session.carts)){
            let newCart = removeFromArr(prod, req.session.carts);
            req.session.carts = newCart;
+           getTotalPriceAll(req, res, next);
        }
 
-       res.status(200).render("../views/cart", {products: req.session.carts});
+       res.status(200).render("../views/cart", {products: req.session.carts, totalAll: req.session.allTot, totCart: req.session.totCart});
 
        
        
@@ -178,6 +183,25 @@ function removeFromArr(obj, arr){
     return newArr;
 }
 
+
+
+
+// calculates the total price for all items in cart
+function getTotalPriceAll(req, res, next){
+    if (req.session.carts === null){
+        req.session.allTot = 0;
+        return;
+    }
+
+    let tot = 0;
+    let l = req.session.carts.length;
+    let arr = req.session.carts;
+    for (let i = 0; i < l; i++){
+        tot += parseFloat(arr[i].total);
+    }
+
+    req.session.allTot =  (Math.round(tot *100) /100).toFixed(2);;
+}
 
 
 

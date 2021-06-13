@@ -18,16 +18,22 @@ html(lang="en")
             
             include ../public/products.css
             include ../public/product.css
+            include ../public/workbook-searchBar.css
             
     body 
         include ../partials/header
-        #cartStatus Items in Cart: 0 
         // the search bar
-        input#searchInput(placeholder="Search for workbooks")
-        input#subject(placeholder="Subject")
-        input#grade(placeholder="Grade")
+        
+        if (totCart === null)
+            -totCart = 0
+        #cartStatus= "Items in Cart: " + totCart
 
-        button#searchWB-But(onclick="getWBs()") Search
+        include ../partials/workbook-searchBar
+        
+        
+
+        // alert when something is added to the cart
+        #alert
 
         #productsDisplay 
             if (workbooks != null)

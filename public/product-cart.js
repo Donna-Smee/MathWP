@@ -1,3 +1,5 @@
+
+
 // clear the item number value on html page
 function clearNumValue(){
     document.getElementById("valueItem").innerHTML = "";
@@ -63,6 +65,7 @@ function addToCart(id, amount){
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
         if (this.readyState == 4 && this.status == 200){
+           
             document.open();
             document.write(this.responseText);
             document.close();

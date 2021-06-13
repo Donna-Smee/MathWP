@@ -19,7 +19,9 @@ html(lang="en")
     body 
         include ../partials/header
 
-        #cartStatus Items in Cart: 0 
+        if (totCart === null)
+            -totCart = 0
+        #cartStatus= "Items in Cart: " + totCart
 
         #productContainer
             #leftSide 

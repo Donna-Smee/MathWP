@@ -1,0 +1,82 @@
+body {
+    font-family: "Quicksand";
+}
+
+body {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#gameTitle, #gameDescript {
+    text-align: center;
+}
+
+
+#gameBox {  
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+
+#mainGame {
+    width: 80vmin;
+    height: 80vmin;
+    background-color: aliceblue;
+}
+
+#scoreBar {
+    width: 10vmin;
+    margin-left: 1em;
+    display: flex;
+    flex-direction: column-reverse;
+
+}
+
+#scoreBar > div {
+    flex: 1;
+}
+
+#one {
+    background-color: #FF0000;
+}
+
+#two {
+    background-color: #FF8700;
+}
+
+#three {
+    background-color: #FFD300;
+}
+
+#four {
+    background-color: #DEFF0A;
+}
+
+#five {
+    background-color: #A1FF0A;
+}
+
+#six {
+    background-color: #0AFF99;
+}
+
+#seven {
+    background-color: #0AEFFF;
+}
+
+#eight {
+    background-color: #147DF5;
+}
+
+#nine {
+    background-color: #580AFF;
+}
+
+#ten {
+    background-color: #BE0AFF;
+}

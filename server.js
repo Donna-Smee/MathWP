@@ -31,7 +31,7 @@ let pageRouter = require("./page-router");
 app.use("/pages", pageRouter);
 
 let workbookRouter = require("./workbook-router");
-app.use("/workbooks", workbookRouter);
+app.use("/workbooks", totCartItems, workbookRouter);
 
 let worksheetRouter = require("./worksheet-router");
 app.use("/worksheets", worksheetRouter);
@@ -41,7 +41,7 @@ app.use("/admin", adminRouter);
 
 
 let cartRouter = require("./cart-router");
-app.use("/cart", cartRouter);
+app.use("/cart", totCartItems, cartRouter);
 
 db.once('open', function(){
     https.createServer({
@@ -90,6 +90,30 @@ app.get("/products", function(req, res, next){
 });
 
 
+
+app.get("/mc", function(req, res, next){
+    res.render("../theGames/multipleC");
+});
+
+
+
+// gets the total number of items in cart
+function totCartItems(req, res, next){
+    let carts = req.session.carts;
+    if (!carts){
+        req.session.totCart = 0;
+        next();
+        return;
+    }
+    let len = carts.length;
+    let tot = 0;
+
+    for (let i = 0; i <len; i++){
+        tot += carts[i].amount;
+    }
+    req.session.totCart = tot;
+    next();
+}
 
 
 

@@ -132,7 +132,7 @@ function respondWB(req, res, next){
 	console.log('responding:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::');
     console.log(res.workbooks);
 	res.format({
-		"text/html": () => {res.render("../views/products", {workbooks: res.workbooks, qstring: req.qstring, current: req.query.page, more: res.more})},
+		"text/html": () => {res.render("../views/products", {workbooks: res.workbooks, qstring: req.qstring, current: req.query.page, more: res.more, totCart: req.session.totCart})},
 		"application/json": () => {res.status(200).json(res.workbooks)}
 	});
     next();
@@ -189,7 +189,7 @@ function getWorkbook(req, res, next){
             return;
         }
         if (result != null){
-            res.render("product", {product: result});
+            res.render("product", {product: result, totCart: req.session.totCart});
             res.end();
         }else {
             res.send("Workbook is not found.");

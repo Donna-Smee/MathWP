@@ -6,11 +6,29 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Your Cart
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
         style
             
             include ../public/index.css
             include ../public/cart.css
+            include ../public/product.css
     body 
+
+        include ../partials/header
+
+
+        if (totCart === null)
+            -totCart = 0
+        #cartStatus= "Items in Cart: " + totCart
+
+
+        h3#cartHeading Shopping Cart
 
         #cart-info
             #cart-items 
@@ -24,9 +42,9 @@ html(lang="en")
                             .each-prod
                                 .deleteButContainer
                                     button.deleteButton(value=pd.prod onclick="deleteFromCart(this.value)") &times;
-                                img.pImg(src=pd.pic, alt=pd.Title + "image")
+                                <a href="/workbooks/#{pd.prod}"><img class="pImg" src=#{pd.pic} alt=""></a>
                                 .titlePrice
-                                    p.pTitle= pd.title
+                                    <a class="pTitle" href="/workbooks/#{pd.prod}"><p class="pTitle">#{pd.title}</p></a>
                                     p.pPrice= "$" + pd.price + " each"
                                 .itemNumController
                                     .minusItem(class="unselectable" onclick="updateCart(this.id, -1)" id=pd.prod) −
@@ -37,42 +55,42 @@ html(lang="en")
                             .each-prod-last
                                 .deleteButContainer
                                     button.deleteButton(value=pd.prod onclick="deleteFromCart(this.value)") &times;
-                                img.pImg(src=pd.pic, alt=pd.Title + "image")
+                                <a href="/workbooks/#{pd.prod}"><img class="pImg" src=#{pd.pic} alt=""></a>
                                 .titlePrice
-                                    p.pTitle= pd.title
+                                    <a class="pTitle" href="/workbooks/#{pd.prod}"><p class="pTitle">#{pd.title}</p></a>
                                     p.pPrice= "$" + pd.price + " each"
                                 .itemNumController
                                     .minusItem(onclick="updateCart(this.id, -1)" class="unselectable" id=pd.prod) −
                                     .valueItem(id=theID)= pd.amount
                                     .plusItem(onclick="updateCart(this.id, 1)" class="unselectable" id=pd.prod) +
                                 p.pTotal= "$" + pd.total
+
+                
                         
 
                             
                                 
-                            
-                            
-                            
+                                       
 
             #total-discount    
                 #total
                     h4#total-heading The Total Amount:  
-                    -let allTotal = 0
-                    if (products != null)
-                        each pd in products 
-                            -allTotal += pd.total
-
-                    h6#sub-total-h= "SUBTOTAL " + allTotal
-                    h6#total-h= "TOTAL " + allTotal
-
+                    #subTotDiv                    
+                        p#sub-total-h= "SUBTOTAL"
+                        p= "$" + totalAll
+                    #off
+                    #totDiv
+                        p#total-h= "TOTAL"
+                        p= "$" + totalAll
                     button#toCheckoutBut Proceed To Checkout
 
                 #coupon 
-                    input(type="text" placeholder="Promo code")
+                    input#promoInput(type="text" placeholder="Promo code")
                     button#promoBut Apply 
 
     script 
         include ../public/product-cart.js
+        include ../public/prevent-up.js
 
 
 

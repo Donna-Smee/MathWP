@@ -1,0 +1,9 @@
+#searchWB {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+#searchInput, #subject, #grade, #searchWB-But {
+    padding: 1em;
+}
