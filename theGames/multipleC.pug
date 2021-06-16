@@ -6,6 +6,8 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
         <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
         style
             include ../public/multipleC.css
         title Document
@@ -13,22 +15,65 @@ html(lang="en")
         h2#gameTitle Addition
         h4#gameDescript Choose the Correct Answer for each Question! 
       
-        p &check;
+        //p &check;
+
+
+        #endGame 
+            #heading-endGame
+                #totScore  
+                
+                button#closeEndGame(onclick="closeEndGame()") &times;
+            #earned
+                p#batEarned You earned 1 battery &rarr;
+                button#feedRobotBut Feed Robot
+            #nav-endGame 
+                button#playAgainBut Play Again
+                button#menu Menu
         
         #gameBox 
+
             #mainGame
-                #question 
-                #choices
+                #mainMenu
+                    #operationSelect
+                        p Choose an Operation
+                        #operations
+                            button(onclick="showModeSelect('+')") Addition 
+                            button Subtraction 
+                            button(onclick="showModeSelect('*')") Multiplication
+                            button Division 
+                            
+
+                    button#startGame(onclick="getOperation()") Play
+                
+                    #modeSelect 
+                        p Choose a Mode
+                        #modes
+                            button(onclick="play('easy')") Easy 
+                            button(onclick="play('medium')") Medium 
+                            button(onclick="play('hard')") Hard
+
+
+                
+
+                #liveGame
+                    #question 
+                    #choices
+                        button#a1(onclick="checkAnswer(this.innerHTML, this.value)") 
+                        button#a2(onclick="checkAnswer(this.innerHTML, this.value)") 
+                        button#a3(onclick="checkAnswer(this.innerHTML, this.value)") 
+                        button#a4(onclick="checkAnswer(this.innerHTML, this.value)")    
             #scoreBar
-                #one
-                #two
-                #three
-                #four
-                #five
-                #six
-                #seven
-                #eight
-                #nine
-                #ten
+                #q1.unanswered
+                #q2.unanswered
+                #q3.unanswered
+                #q4.unanswered
+                #q5.unanswered
+                #q6.unanswered
+                #q7.unanswered
+                #q8.unanswered
+                #q9.unanswered
+                #q10.unanswered 
+    script 
+        include ../public/multipleC.js
         
 

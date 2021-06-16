@@ -1,7 +1,6 @@
 #searchWB {
     display: flex;
-    flex-direction: column;
-    width: 20%;
+    flex-direction: row;
 }
 
 #searchInput, #subject, #grade, #searchWB-But {
