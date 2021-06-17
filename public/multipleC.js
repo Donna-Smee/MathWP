@@ -1,5 +1,5 @@
 let totalPlayed = 0;
-let currSign = '+';
+let currSign = '';
 let currMode = "";
 
 // if answered correctly, then true
@@ -45,6 +45,13 @@ function play(mode){
             return;
         }
         
+        if (currSign === "/"){
+            randQuestionDivision(2, 1, document.getElementById("choices").childElementCount);
+        }
+        
+        if (currSign === "-"){
+            randQuestionMinus(1, 1, document.getElementById("choices").childElementCount);
+        }
         
     }
 
@@ -52,6 +59,14 @@ function play(mode){
         if (currSign === "+" || currSign === "*"){
             randQuestion(2, currSign, 2, document.getElementById("choices").childElementCount);
             return;
+        }
+
+        if (currSign === "/"){
+            randQuestionDivision(3, 2, document.getElementById("choices").childElementCount);
+        }
+
+        if (currSign === "-"){
+            randQuestionMinus(2, 1, document.getElementById("choices").childElementCount);
         }
         
         
@@ -65,6 +80,14 @@ function play(mode){
         if (currSign === "*"){
             randQuestion(2, currSign, 3, document.getElementById("choices").childElementCount);
             return;
+        }
+
+        if (currSign === "/"){
+            randQuestionDivision(4, 2, document.getElementById("choices").childElementCount);
+        }
+
+        if (currSign === "-"){
+            randQuestionMinus(3, 2, document.getElementById("choices").childElementCount);
         }
         
     }
@@ -83,7 +106,7 @@ function randQuestion(numOfDigits, sign, numOfTerms, lenPossA){
     console.log("sign: " + sign);
     let question = "";
     let terms = [];
-    let answer = 0;
+    //let answer = 0;
 
     if (numOfDigits <= 0 || numOfTerms <= 1){
         return question;
@@ -100,14 +123,22 @@ function randQuestion(numOfDigits, sign, numOfTerms, lenPossA){
             question += num + " " + sign + " ";
         }
         terms.push(num);
-        answer += num;
+        //answer += num;
     }
+
+
+    let answer = getAnswer(terms);
+    console.log("fewlkwe: " + terms);
+    
 
     question += " = ?"
     let possAnswers = getPossAnswers(answer, lenPossA);
 
     showQuestion(terms, possAnswers, question); 
 }
+
+
+
 
 
 // generate the first num for the given # of digits 
@@ -138,6 +169,97 @@ function getLastNum(numOfDigits){
 function genRanInt(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+
+
+function randQuestionMinus(numDigitsFirst, numDigitsSec, lenPossA){
+    console.log("division;;;;;;");
+    let question = "";
+    let terms = [];
+
+    let firstNumFirst = getFirstNum(numDigitsFirst);
+    let lastNumFirst = getLastNum(numDigitsFirst);
+
+    let firstNumSec = getFirstNum(numDigitsSec);
+    let lastNumSec = getLastNum(numDigitsSec);
+
+    let firstTerm = genRanInt(firstNumFirst, lastNumFirst);
+
+    let secTerm = genRanInt(firstNumSec, lastNumSec);
+
+    let counter = 0;
+
+    while (firstTerm < secTerm){
+        secTerm = genRanInt(firstNumSec, lastNumSec);
+        console.log(counter++);
+        if (counter === 10){
+            firstTerm = genRanInt(firstNumFirst, lastNumFirst);
+            counter = 0;
+        }
+    }
+
+    question = firstTerm + " - " + secTerm + " = ?";
+    terms.push(firstTerm);
+    terms.push(secTerm);
+    let answer = getAnswer(terms);
+    
+    let possAnswers = getPossAnswers(answer, lenPossA);
+
+
+    console.log("Div: answer: " + answer);
+    console.log(terms);
+
+    showQuestion(terms, possAnswers, question); 
+}
+
+
+
+// generate random question for division, given the num of digits of first term, and second term
+// only two terms
+// must conclude in a (whole) integer answer
+function randQuestionDivision(numDigitsFirst, numDigitsSec, lenPossA){
+    console.log("division;;;;;;");
+    let question = "";
+    let terms = [];
+
+    let firstNumFirst = getFirstNum(numDigitsFirst);
+    let lastNumFirst = getLastNum(numDigitsFirst);
+
+    let firstNumSec = getFirstNum(numDigitsSec);
+    let lastNumSec = getLastNum(numDigitsSec);
+
+    let firstTerm = genRanInt(firstNumFirst, lastNumFirst);
+
+    let secTerm = genRanInt(firstNumSec, lastNumSec);
+
+    let counter = 0;
+
+    while (firstTerm % secTerm != 0){
+        secTerm = genRanInt(firstNumSec, lastNumSec);
+        console.log(counter++);
+        if (counter === 10){
+            firstTerm = genRanInt(firstNumFirst, lastNumFirst);
+            counter = 0;
+        }
+    }
+
+    question = firstTerm + " / " + secTerm + " = ?";
+    terms.push(firstTerm);
+    terms.push(secTerm);
+    let answer = getAnswer(terms);
+    
+    let possAnswers = getPossAnswers(answer, lenPossA);
+
+
+    console.log("Div: answer: " + answer);
+    console.log(terms);
+
+    showQuestion(terms, possAnswers, question); 
+
+
+
+}
+
 
 
 // generates an array with one element being the correct answer 
@@ -185,13 +307,20 @@ function getPossAnswers(answer, len){
 // checks if the answer clicked is right or wrong
 function checkAnswer(choice, terms){
     let answer = 0;
+    console.log("terms: " + terms);
     let arr = terms.split(",");
     let len = arr.length;
 
-    for (let i = 0; i < len; i++){
+    /*for (let i = 0; i < len; i++){
         console.log(arr[i]);
         answer += parseInt(arr[i]);
-    }
+    }*/
+
+
+    answer = getAnswer(terms);
+
+
+    
 
     console.log("answer: " + answer);
     console.log("choice: "+ choice);
@@ -257,9 +386,108 @@ levels: easy, medium, hard
 
 
 
+// ----------------------- calculates answers given the terms
+function getAnswer(terms){
+    console.log("ndwoendweieiiiiiiiiiii: " + terms);
+    console.log("THE SIGNNNN: " + currSign)
+    let arr = terms.toString().split(",");
+    if (currSign === '+'){
+        console.log("entered the plus palace.");
+        console.log("nferbferiofneorn -------------: " + calcAnswerPlus(terms));
+        return calcAnswerPlus(arr);
+    }else if (currSign=== "-"){
+        return calcAnswerMinus(arr);
+    }else if (currSign=== "*"){
+        return calcAnswerMultiply(arr);
+    }else if (currSign === "/"){
+        return calcAnswerDivide(arr);
+    }else {
+        return 0;
+    }
+}
+
+function calcAnswerPlus(terms){
+    
+    console.log("hi");
+    if (terms === null){
+        return 0;
+    }
+    let answer = 0;
+
+    let len = terms.length;
+    for (let i = 0; i < len; i++){
+        
+        answer += parseInt(terms[i]);
+    }
+    console.log("plus paalce answer: " + answer);
+    return answer;  
+}
+
+
+function calcAnswerMinus(terms){
+    if (terms === null){
+        return 0;
+    }
+
+    let len = terms.length;
+
+    if (len === 0){
+        return 0;
+    }
+
+
+    let answer = parseInt(terms[0]);
+
+    for (let i = 1; i < len; i++){
+        answer -= parseInt(terms[i]);
+    }
+
+    return answer;
+}
+
+function calcAnswerMultiply(terms){
+    if (terms === null){
+        return 0;
+    }
+    let answer = 1;
+
+    let len = terms.length;
+    for (let i = 0; i < len; i++){
+        answer *= parseInt(terms[i]);
+    }
+
+    return answer;
+}
+
+
+function calcAnswerDivide(terms){
+    if (terms === null){
+        return 0;
+    }
+
+    let len = terms.length;
+
+    if (len === 0){
+        return 0;
+    }
+
+
+    let answer = parseInt(terms[0]);
+    for (let i = 1; i < len; i++){
+        answer /= parseInt(terms[i]);
+    }
+
+    return answer;
+}
+
+
+
+
+
 // ------------------------ view
 
 function showQuestion(terms, possAnswers, question){
+    console.log("showing: " + terms);
     document.getElementById("question").innerHTML = question;
     let len = possAnswers.length;
 
