@@ -8,27 +8,38 @@ html(lang="en")
         <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         style
             include ../public/multipleC.css
         title Document
     body 
-        h2#gameTitle Addition
+        h2#gameTitle + - * / Math Game
         h4#gameDescript Choose the Correct Answer for each Question! 
       
         //p &check;
 
+        #optionsContainer  
+            #heading-options 
+                #optionsTitle Options
+                button#closeOptions(onclick="closeOptions()") &times;
+            
+            #nav-options
+                button#restartBut(onclick="closeEndGame()") Restart/New Game
+                button.menu(onclick="goToMenu()") Menu
 
         #endGame 
             #heading-endGame
                 #totScore  
+                button#closeEndGame(onclick="doNothingEndGame()") &times;
                 
-                button#closeEndGame(onclick="closeEndGame()") &times;
             #earned
                 p#batEarned You earned 1 battery &rarr;
+                
                 button#feedRobotBut Feed Robot
             #nav-endGame 
-                button#playAgainBut Play Again
-                button#menu Menu
+                button#playAgainBut(onclick="closeEndGame()") Play Again
+                button.menu(onclick="goToMenu()") Menu
         
         #gameBox 
 
@@ -56,6 +67,7 @@ html(lang="en")
                 
 
                 #liveGame
+                    <i id="menuIcon" class="fa fa-ellipsis-v" onclick="optionsMenu()"></i>
                     #question 
                     #choices
                         button#a1(onclick="checkAnswer(this.innerHTML, this.value)") 

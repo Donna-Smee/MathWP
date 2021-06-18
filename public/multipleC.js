@@ -6,6 +6,8 @@ let currMode = "";
 // if not, then false
 let rightWrong = [];
 
+let ended = false;
+
 
 
 // get operation/sign selection (addition, subtraction...) (show the page)
@@ -302,6 +304,10 @@ function getPossAnswers(answer, len){
     return poss;
 }
 
+function clearGameStats(){
+    rightWrong = [];
+    totalPlayed = 0;
+}
 
 
 // checks if the answer clicked is right or wrong
@@ -343,8 +349,7 @@ function checkAnswer(choice, terms){
         play(currMode);
     }else {
         let arr = rightWrong;
-        rightWrong = [];
-        totalPlayed = 0;
+        clearGameStats();
         showEndGame(countCorrect(arr));
     }
 
@@ -364,6 +369,9 @@ function countCorrect(arr){
 
     return correct + "/"  + tot;
 }
+
+
+
 
 
 
@@ -508,6 +516,7 @@ function showQuestion(terms, possAnswers, question){
 
 // clear questions check marks/ x and colours
 function clearScoreBar(len){
+    clearGameStats();
     for (let i = 1; i <= len; i++){
         let score = document.getElementById("q" + i);
         score.innerHTML = "";
@@ -525,15 +534,53 @@ function showEndGame(score){
 }
 
 
+function doNothingEndGame(){
+    document.getElementById("endGame").style.display = "none";
+    document.getElementById("liveGame").style.pointerEvents = "none";
+    document.getElementById("menuIcon").style.pointerEvents = "auto";
+    ended = true;
+}
+
 
 function closeEndGame(){
     document.getElementById("endGame").style.display = "none";
+    document.getElementById("optionsContainer").style.display = "none";
     document.getElementById("liveGame").style.pointerEvents = "auto";
     clearScoreBar(10);
     play(currMode);
+    ended = false;
 }
 
 
 
+function goToMenu(){
+    clearScoreBar(10);
+    document.getElementById("endGame").style.display = "none";
+    document.getElementById("optionsContainer").style.display = "none";
+    document.getElementById("liveGame").style.display = "none";
+    document.getElementById("modeSelect").style.display = "none";
+    document.getElementById("liveGame").style.pointerEvents = "auto";
+    totalPlayed = 0;
+    currSign = '';
+    currMode = "";
+    rightWrong = [];
+    document.getElementById("mainMenu").style.display = "flex";
+    document.getElementById("startGame").style.display = "block";
+}
 
 
+function optionsMenu(){
+    document.getElementById("optionsContainer").style.display = "flex";
+    document.getElementById("liveGame").style.pointerEvents = "none";
+}
+
+
+function closeOptions(){
+    document.getElementById("optionsContainer").style.display = "none";
+    if (!ended){
+        document.getElementById("liveGame").style.pointerEvents = "auto";
+    }
+    
+
+
+}

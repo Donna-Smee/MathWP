@@ -3,45 +3,7 @@
     margin: 0;
 }
 
-#header {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    background-color: rgb(214, 128, 240);
-    border-bottom: 1em black solid;
-    
-}
 
-#header > a {
-    margin: auto 0;
-    font-size: 1.8vw;
-    padding: 1em;
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
-
-}
-
-
-
-
-#cart-icon {
-    transition-duration: 0.2s;
-}
-
-
-
-.tab:hover {
-    background-color: rgb(153, 53, 184);
-}
-
-#cart-icon:hover {
-    transform: translateY(-5%);
-    color: black;
-    
-}
 
 #title {
     box-sizing: border-box;
@@ -83,7 +45,7 @@
     width: 15%;
     background-color: rgb(214, 128, 240);
     animation-name: slide;
-    animation-duration: 5s;
+    animation-duration: 4s;
     animation-iteration-count: infinite;
 }
 
