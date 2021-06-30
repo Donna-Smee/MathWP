@@ -29,7 +29,7 @@ html(lang="en")
                     img(src=ws.PreviewPic, alt="worksheet preview image")
                     .wsText 
                         h4= ws.Title 
-                        p= ws.Description 
+                        p.wsDescript= ws.Description 
             
 
             if current > 1

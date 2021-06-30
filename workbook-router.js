@@ -23,7 +23,7 @@ function queryParser(req, res, next){
 
     try{
         if (!req.query.limit){
-            req.query.limit = 2;
+            req.query.limit = 9;
         }else {
             req.query.limit = Number(req.query.limit);
 
@@ -32,7 +32,7 @@ function queryParser(req, res, next){
             }
         }
     }catch{
-        req.query.limit = 2;
+        req.query.limit = 9;
     }
 
 

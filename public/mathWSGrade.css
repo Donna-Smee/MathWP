@@ -6,6 +6,7 @@ body {
     text-align: center;
     margin-top: 2em;
     margin-bottom: 1.5em;
+    
 }
 
 
@@ -108,10 +109,24 @@ body {
     background-color: cornsilk;
 }
 
+@media (max-width: 1024px) {
+    #sections {
+        width: 90%;
+    }
+    #gradeTitle {
+        font-size: 4vw;
 
+    }
+}
 
 @media (max-width: 767px){
   
+    #gradeTitle {
+        margin-right: 0.2em;
+        margin-left: 0.2em;
+        font-size: 5vw;
+    }
+
     #sections {
         flex-direction: column;
     }

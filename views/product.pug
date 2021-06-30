@@ -16,6 +16,7 @@ html(lang="en")
             
             include ../public/header.css
             include ../public/product.css
+            include ../public/workbook-searchBar.css
     body 
         include ../partials/header
 
@@ -23,9 +24,14 @@ html(lang="en")
             -totCart = 0
         #cartStatus= "Items in Cart: " + totCart
 
+        #searchBarWB
+            include ../partials/workbook-searchBar
+
         #productContainer
+            -let id = product._id
             #leftSide 
-                img#productImage(src=product.PreviewPics[0], alt="Workbook Title Page Image")
+                #prodImgContainer
+                    img#productImage(src=product.PreviewPics[0], alt="Workbook Title Page Image")
                 #price= "$" + product.Price
                 #addCart
                     #itemNumController
@@ -33,6 +39,7 @@ html(lang="en")
                         #valueItem 1
                         #plusItem(onclick="increaseNumValue()" class="unselectable") +
                     button#addCartButton(onclick="updateCartFromProductPage(this.value)" value=product._id) Add to Cart
+                    button(class="fa fa-cart-plus" id="addCartButtonIcon" onclick="updateCartFromProductPage(this.value)" value=id)
                 
                 if (product.PreviewPics.length > 0)
                     h6#sampleTitle Sample Pages

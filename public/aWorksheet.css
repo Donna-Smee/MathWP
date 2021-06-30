@@ -1,3 +1,5 @@
+
+
 body {
     font-family: "Varela Round", sans-serif;
 }
@@ -20,6 +22,8 @@ body {
     width: 50%;
 
 }
+
+
 
 
 #previewImg {
@@ -80,3 +84,31 @@ body {
 }
 
 /*do the following hover color effect for the rest of the sections later^*/
+
+
+
+
+
+
+
+
+@media screen and (max-width: 769px) {
+    #previewImg {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    #text-info {
+        width: 90%;
+        font-size: 4vw;
+        text-align: center;
+    }
+
+    #info-ws-buttons {
+        width: 60%;
+    }
+
+    #info-ws-buttons > a {
+        flex: 1;
+    }
+}

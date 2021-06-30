@@ -138,7 +138,7 @@
     50% {border-top: 1em solid black;}
     100%   {border-top: 1em solid rgb(214, 128, 240);}
 }
-
+    
 #divider {
     position: relative;
     bottom: 2em;
@@ -158,4 +158,23 @@
     color: white;
     padding-top: 2em;
     text-align: center;
+}
+
+
+
+
+
+/* Responsiveness */
+@media screen and (max-width:769px) {
+    #info {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+
+    .card {
+        width: 80%;
+    }
+
 }

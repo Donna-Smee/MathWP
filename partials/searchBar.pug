@@ -1,5 +1,8 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
 style
     include ../public/searchBar.css
+    
 
 div#search
     input#searchInput(type="text" placeholder="Search here")
@@ -21,4 +24,5 @@ div#search
             option(value=5) 5
             option(value=6) 6   
         
-    button#searchBut(onclick="searchWS()") Search
+    //button#searchBut(onclick="searchWS()")= "Search"  
+    <button class="fa fa-search" id="searchBut" onclick="searchWS()"> <span></span></button>

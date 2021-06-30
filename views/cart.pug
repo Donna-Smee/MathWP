@@ -16,8 +16,9 @@ html(lang="en")
         style
             
             include ../public/header.css
-            include ../public/cart.css
             include ../public/product.css
+            include ../public/cart.css
+            
     body 
 
         include ../partials/header
@@ -64,14 +65,6 @@ html(lang="en")
                                     .valueItem(id=theID)= pd.amount
                                     .plusItem(onclick="updateCart(this.id, 1)" class="unselectable" id=pd.prod) +
                                 p.pTotal= "$" + pd.total
-
-                
-                        
-
-                            
-                                
-                                       
-
             #total-discount    
                 #total
                     h4#total-heading The Total Amount:  
@@ -88,7 +81,7 @@ html(lang="en")
                     input#promoInput(type="text" placeholder="Promo code")
                     button#promoBut Apply 
 
-    script 
+    script
         include ../public/product-cart.js
         include ../public/prevent-up.js
 

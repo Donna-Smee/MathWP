@@ -1,8 +1,32 @@
 #searchWB {
     display: flex;
     flex-direction: row;
+    margin: 1em;
+
 }
 
 #searchInput, #subject, #grade, #searchWB-But {
     padding: 1em;
+}
+
+#searchWB-But {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 1em 1.5em;
+    cursor: pointer;
+}
+
+
+@media (max-width: 769px){
+    
+    #searchWB {
+        flex-direction: column;
+        width: 78%;
+    }
+
+    #searchWB-But {
+        margin-top: 1em;
+    }
+   
 }

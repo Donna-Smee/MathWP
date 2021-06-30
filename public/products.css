@@ -19,6 +19,8 @@ body, pre {
 }
 
 
+
+
 .workbook:hover{
     transform: translateY(-10px);
 }
@@ -69,6 +71,7 @@ body, pre {
 }
 
 .add-cart-but {
+    font-size: 0.9vw;
     min-width: 6em;
     padding: 1em 1.6em;
     border-radius: 30px;
@@ -88,4 +91,101 @@ body, pre {
 .add-cart-but:hover {
     cursor: pointer;
     background-color: #e60000;
+}
+
+
+
+/* Responsive */
+@media (max-width: 1200px){
+    
+    #products {
+        width: 60%;
+        
+    }
+
+    .workbook, .add-cart-but {
+        font-size: 0.8em;
+    }
+
+    .wbPrice {
+        font-size: 1.2em;
+    }
+    .add-cart-but {
+        padding: 1em 1.5em;
+    }
+   
+}
+
+
+@media (max-width: 900px){
+    
+    #products {
+        width: 70%;
+        
+    }
+
+    .workbook, .add-cart-but {
+        font-size: 0.8em;
+    }
+
+    .wbPrice {
+        font-size: 1em;
+    }
+
+    .add-cart-but {
+        padding: 1em 1.3em;
+    }
+   
+}
+
+
+@media (max-width: 769px){
+    
+    #products {
+        width: 80%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .workbook, .add-cart-but {
+        font-size: 0.9em;
+    }
+
+    .wbPrice {
+        font-size: 1.2em;
+    }
+   
+}
+
+
+@media (max-width: 600px){
+    #products {
+        width: 70%;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .workbook, .add-cart-but {
+        font-size: 3vw;
+    }
+
+    .wbPrice {
+        font-size: 3.8vw;
+    }
+   
+}
+
+@media (max-width: 480px){
+    
+    #products {
+        width: 80%;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .workbook, .add-cart-but {
+        font-size: 3.6vw;
+    }
+
+    .wbPrice {
+        font-size: 4.8vw;
+    }
+   
 }

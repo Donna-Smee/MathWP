@@ -1,56 +1,102 @@
+
+
 #search {
+    
+    margin: 1em;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    font-size: 1em;
 }
 
 #searchInput {
-    padding: 0.5em;
-    width: 250px;
-    margin: 2px;
+    font-family: "Quicksand";
+    padding: 1em;
+    min-width: 250px;
 }
 
 
 #searchBut {
-    padding: 0.5em;
+    padding: 1em 1em;
+    margin: auto 0;
+    height: fit-content;
+    background: none;
+    cursor: pointer;
+    margin-left: 2em;
+    color: white;
+    background-color: rgb(214, 128, 240);
+    border:none;
+    border-radius: 50px;
+    -webkit-appearance: none;
+    text-decoration: none;
+    outline: none;
+    border: 0.2em rgb(214, 128, 240) solid;
+}
+
+#searchBut > span {
+    font-family: "Quicksand";
+}
+
+#searchBut:hover {
+    border: 0.2em rgb(214, 128, 240) solid;
+    background-color: white;
+    color: rgb(214, 128, 240);
+    outline: none;
 }
 
 
 #sectionSelect, #gradeSelect {
-    padding: 0.5em;
+    padding: 1.5em 1em;
+    font-family: "Quicksand";
     
 }
 
 
 
+@media (max-width: 769px){
+    
 
-@media (max-width: 480px){
+    #filter-selections > select > option {
+        width: 100px;
+    }
     #search {
         flex-direction: column;
-        margin: 0.5em;
-        width: 90%;
-        background-color: pink;
+        width: 70%;
+        margin: 0 auto;
+        padding: 1px;
+        overflow:hidden;
+        margin-top: 1.5em;
     }
 
-    #filter-selections{
+
+    
+
+    #filter-selections {
+        width: 100%;
         display: flex;
-        flex-direction: row;
-
+        flex-direction: column;
     }
 
-    #searchSelect, #gradeSelect {
-        flex: 1;   
-    }
-
-    #searchInput {
+    #searchInput, #sectionSelect, #gradeSelect, #searchBut {
+        flex: 1;
         margin: 0;
-        
+        padding: 0.8em 0.4em;
+        margin-bottom: 1em;
+        border: 1.5px black solid;
+        font-size: 4vw;
     }
+    
 
+   
 
+    
 
-    #filter-selections, #searchInput, #searchBut {
-        width: inherit;
-        
-    }
+    
+  
+
+    
+
+ 
+
+   
 }
