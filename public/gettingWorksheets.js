@@ -8,15 +8,28 @@ function getWorkSheets(val){
         return;
     }
 
-    let xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-            window.location = this.responseURL;
+    if (section === 'viewallbut'){
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                window.location = this.responseURL;
+            }
         }
-    }
 
-    xhttp.open("GET", "/worksheets?section=" + section + "&grade=" + grade);
-    xhttp.send();
+        xhttp.open("GET", "/worksheets?grade=" + grade);
+        xhttp.send();
+    }else {
+
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                window.location = this.responseURL;
+            }
+        }
+
+        xhttp.open("GET", "/worksheets?section=" + section + "&grade=" + grade);
+        xhttp.send();
+    }
 }
 
 

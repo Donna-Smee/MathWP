@@ -20,7 +20,7 @@ html(lang="en")
         
 
         div#viewAll
-            button#viewAllBut All Sections
+            button#viewAllBut(onclick="getWorkSheets('viewAllBut')" value=grade) All Sections
         #sections
             div(onclick="getWorkSheets('number')" value=grade)#number 
                 p Number 
@@ -29,7 +29,7 @@ html(lang="en")
             div(onclick="getWorkSheets('data')" value=grade)#data 
                 p Data 
             div(onclick="getWorkSheets('spacial')" value=grade)#spacial 
-                p Spacial Sense 
+                p Spatial Sense 
             div(onclick="getWorkSheets('finance')" value=grade)#finance 
                 p Financial Literacy 
 

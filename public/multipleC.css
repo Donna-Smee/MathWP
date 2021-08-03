@@ -53,6 +53,8 @@ body {
 
 }
 
+
+
 #endGame, #optionsContainer {
     width: 40%;
     height: 50%;
@@ -426,4 +428,29 @@ link: https://codepen.io/RafaelDeJongh/pen/pNEZgO*/
     background: none;
     background-color: white;
     margin-top: 0.5em;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 769px) {
+    #gameBox {
+        flex-direction: column-reverse;
+    }
+
+    #scoreBar {
+        width: 100%;
+        height: 10vmin;
+        margin: 0;
+        margin-bottom: 1em;
+        flex-direction: row;
+    }
+
+
 }

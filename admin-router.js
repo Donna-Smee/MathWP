@@ -31,7 +31,10 @@ router.post("/log/month", auth, loadLogMonth);
 router.post("/log/year", auth, loadLogYear);
 
 
+router.get("/loadWS", auth, openLoadWSPage);
+
 router.get("/:sc",  loadAdminLoginPage);
+router.post("/saveLoadedWS", auth, loadInWorksheets);
 
 
 
@@ -195,6 +198,9 @@ function saveNewWS(req, res, next){
     newWS.Description = data["Description"];
     newWS.Grade = data["Grade"];
     newWS.Section = data["Section"];
+    newWS.AllDescript = data["AllDescript"];
+
+    newWS.PreviewPic = data["PreviewPic"];
 
     newWS.save(function(err, result){
         if (err){
@@ -203,7 +209,8 @@ function saveNewWS(req, res, next){
         }
         console.log("saved: ");
         console.log(result);
-        res.status(200).send("https://localhost:3000/worksheets/" + result._id.toString());
+        
+        res.status(200).send("https://localhost:3000/worksheets/" + result._id.toString() + "split here" + JSON.stringify(result));
 
     });
 }
@@ -361,7 +368,127 @@ function prizeCodeArrGen(pageNums){
 
 
 
+function openLoadWSPage(req, res, next){
+    if (req.session.loggedIn){
+        res.status(200).render("../views/adminLoadWS");
+        return;
+    }
+}
 
+
+function loadInWorksheets(req, res, next){
+    if (req.session.loggedIn){
+        let data = req.body;
+        let len = data.length;
+
+
+        let total = len;
+        let count = 0;
+        let failed  = 0;
+        let alreadyExists = [];
+        let theFailed = [];
+        let success = 0;
+
+        console.log("fnewonfewnewo:     " + data);
+        if (len > 0){
+            for (let i = 0; i < len; i++){
+                //console.log(!checkExistTitleLoading(data[i]["LowerTitle"].trim()));
+               // if (!checkExistTitleLoading(data[i]["LowerTitle"].trim())){
+
+                Worksheet.findOne().where("LowerTitle").equals(data[i]["LowerTitle"]).exec(function(err, result){
+                    console.log("title checking for: " + data[i]["LowerTitle"]);
+                    if (err){
+                        
+                        console.log("error checking title uh oh");
+                        failed++;
+                        theFailed.push(data[i]["LowerTitle"]);
+                        //return false;
+                    }
+                    if (result === null){
+                        console.log("doesn't exist yet so GOOD");
+                        console.log("yes entered");
+                        let newWS = new Worksheet();
+                        newWS.PDF = data[i]["PDF"];
+                        newWS.Title = data[i]["Title"];
+                        newWS.LowerTitle = data[i]["LowerTitle"];
+                        newWS.Description = data[i]["Description"];
+                        newWS.Grade = data[i]["Grade"];
+                        newWS.Section = data[i]["Section"];
+                        newWS.AllDescript = data[i]["AllDescript"];
+                        newWS.PreviewPic = data[i]["PreviewPic"];
+
+                        newWS.save(function(err, result){
+                            count++;
+                            if (err){
+                                failed++;
+                                theFailed.push(data[i]["LowerTitle"]);
+                                //res.status(500).send("Couldn't save.");
+                                //return;
+                            }else {
+                                success++;
+                            }
+                            //console.log("saved: ");
+                            //console.log(result);
+                            if (total === count){
+                                console.log("success: " + success + "/" + total);
+                                console.log("failed: " + theFailed);
+                                console.log("already exists: " + alreadyExists);
+                                res.status(200).send("success: " + success + "/" + total);
+                            }
+                            
+                            //res.status(200).send("https://localhost:3000/worksheets/" + result._id.toString() + "split here" + JSON.stringify(result));
+
+                        });
+                        //return false;
+                    }else {
+                        console.log("Already exists.");
+                        count++;
+                        alreadyExists.push(data[i]["LowerTitle"]);
+                        if (total === count){
+                            console.log("success: " + success + "/" + total);
+                            console.log("failed: " + theFailed);
+                            console.log("already exists: " + alreadyExists);
+                            res.status(200).send("success: " + success + "/" + total);
+                       // return true;
+                        
+                        }
+                    }
+                });
+                    
+                /*}else {
+                    count++;
+                    alreadyExists.push(data[i]["LowerTitle"]);
+                    if (total === count){
+                        console.log("success: " + success + "/" + total);
+                        console.log("failed: " + theFailed);
+                        console.log("already exists: " + alreadyExists);
+                        res.status(200).send("success: " + success + "/" + total);
+                    }*/
+                }
+                
+            }
+        }
+    }
+
+
+
+function checkExistTitleLoading(title){
+    Worksheet.findOne().where("LowerTitle").equals(title).exec(function(err, result){
+        console.log("title checking for: " + title);
+        if (err){
+            console.log("error checking title uh oh");
+            return false;
+        }
+        if (result === null){
+            console.log("doesn't exist yet so GOOD");
+            return false;
+        }else {
+            console.log("Already exists.");
+            return true;
+            
+        }
+    });
+}
 
 
 

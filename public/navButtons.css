@@ -1,0 +1,61 @@
+#navButtons {
+    margin: 0 auto;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 2em;
+    margin-top: 5em;
+}
+
+#prevBut, #nextBut, #prevButUnClick, #prevButIcon, #nextButIcon, #prevButUnClickIcon {
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    padding: 1em;
+    width: 100px;
+    text-align: center;
+}
+
+#prevButIcon, #nextButIcon, #prevButUnClickIcon {
+    display: none;
+}
+
+
+#prevButUnClick, #prevButUnClickIcon {
+    background-color: rgb(211, 211, 211);
+}
+
+
+
+#prevBut:hover, #nextBut:hover, #prevButIcon:hover, #nextButIcon:hover {
+    background-color: rgb(44, 44, 44);
+}
+
+
+
+
+
+@media screen and (max-width: 769px) {
+
+    #navButtons {
+        width: 80%;
+    }
+
+
+    #prevButIcon, #nextButIcon, #prevButUnClickIcon {
+        display: block;
+    }
+
+    #prevBut, #nextBut, #prevButUnClick {
+        display: none;
+    }
+
+
+    #prevBut, #nextBut, #prevButUnClick, #prevButIcon, #nextButIcon, #prevButUnClickIcon {
+       max-width: 50px;
+       font-size: 3vw;
+       padding: 1em;
+    }
+
+}

@@ -10,12 +10,14 @@
     <link href="https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:300,500" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 
 </head>
 <body>
     <nav id="header">
         
-        <a class="tab">
+        <a class="tab" href="/">
             Home
         </a>
         <a class="tab">
@@ -24,22 +26,23 @@
         <a class="tab" href="/generalMathWS">
             Math Worksheets
         </a>
-        <a class="tab">
-            Hoc Tieng Anh
-        </a>
-        <a class="tab">
+        
+        <a class="tab" href="/contact">
             Contact Us
         </a>
-        <a class="tab" class="last-header" href="/wb-correct-selector">
+        <a class="tab" href="/wb-correct-selector">
             Check
+        </a>
+        <a class="tab" href="/workbooks"  class="last-header">
+            Products
         </a>
         <a id="cart-icon" href="/cart"><i id="cart-icon" class="fa fa-shopping-cart"></i></a>
         <i id="menuIcon" class="fa fa-bars" onclick="toggleMenu()"></i>
     </nav>
 
     <div id="title">
-        <h1>Elimsnow Learning</h1>
-        <div id="titlePic">
+        <h1 data-aos="flip-down">Elimsnow Learning</h1>
+        <div id="titlePic" data-aos="slide-left">
             
         </div>
     </div>
@@ -48,7 +51,7 @@
     </div>
 
 
-    <div id="getStarted">
+    <div id="getStarted" >
         <h3>Get Started</h3>
         <button id="getStartedBut">GO 🚀</button>
     </div>
@@ -68,6 +71,14 @@
     <div id="divider"></div>
 
     <div id="footer">Copyright © 2021 Elimsnow. All Rights Reserved.</div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 200,
+            duration: 1000
+        });
+    </script>
 </body>
 <script src="header.js"></script>
 </html>

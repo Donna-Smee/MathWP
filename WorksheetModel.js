@@ -7,6 +7,7 @@ let worksheetSchema = Schema({
     LowerTitle: {type: String},
     ShortD: {type: String},
     Description: {type: String},
+    AllDescript: {type: String, required: true},
     PreviewPic: {type: String},
     Grade: {type: Number},
     Section: {type: String}

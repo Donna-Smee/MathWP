@@ -7,6 +7,7 @@
     flex-direction: row;
     justify-content: center;
     font-size: 1em;
+    margin-top: 3em;
 }
 
 #searchInput {
@@ -24,13 +25,13 @@
     cursor: pointer;
     margin-left: 2em;
     color: white;
-    background-color: rgb(214, 128, 240);
+    background-color:black;
     border:none;
     border-radius: 50px;
     -webkit-appearance: none;
     text-decoration: none;
     outline: none;
-    border: 0.2em rgb(214, 128, 240) solid;
+    border: 0.2em black solid;
 }
 
 #searchBut > span {
@@ -38,9 +39,9 @@
 }
 
 #searchBut:hover {
-    border: 0.2em rgb(214, 128, 240) solid;
+    border: 0.2em black solid;
     background-color: white;
-    color: rgb(214, 128, 240);
+    color: black;
     outline: none;
 }
 

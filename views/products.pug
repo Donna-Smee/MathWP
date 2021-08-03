@@ -18,6 +18,7 @@ html(lang="en")
             include ../public/products.css
             include ../public/product.css
             include ../public/workbook-searchBar.css
+            include ../public/navButtons.css
             
     body 
         include ../partials/header
@@ -49,21 +50,24 @@ html(lang="en")
                                     //pre #{wb.ShortDescription}
                                 button.add-cart-but(onclick="addToCart(this.value, 1)" value=wb._id) Add to Cart
                     
-                    if current > 1
-                        - let url = "/workbooks?page=" + (current-1)
-                        - if(qstring.length > 0){ url += "&" + qstring; }
-                        a(href=url) Previous
-                        | 
-                    if more
-                        - url = "/workbooks?page=" + (current+1)
-                        - if(qstring.length > 0){ url += "&" + qstring; }
-                        a(href=url) Next
-                                            
+        #navButtons
+            if current > 1
+                - let url = "/workbooks?page=" + (current-1)
+                - if(qstring.length > 0){ url += "&" + qstring; }
+                a(href=url)#prevBut Previous
+                a(class="fa fa-arrow-left" id="prevButIcon" href=url)
+                | 
+            else 
+                a#prevButUnClick Previous
+                a(class="fa fa-arrow-left" id="prevButUnClickIcon")
+            if more
+                - url = "/workbooks?page=" + (current+1)
+                - if(qstring.length > 0){ url += "&" + qstring; }
+                a(href=url)#nextBut Next
+                a(class="fa fa-arrow-right" id="nextButIcon" href=url)
 
-                            
-
-
-                    
+                
+  
 
     
     script 

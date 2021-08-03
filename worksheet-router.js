@@ -100,8 +100,11 @@ function loadWS(req, res, next){
     let startIndex = ((req.query.page-1) * req.query.limit);
 	let amount = req.query.limit;
 
-    console.log(req.query.section);
-    console.log(req.query.grade);
+    console.log("input text: " + req.query.inputText);
+    console.log("Section: " + req.query.section);
+    console.log("grade: " + req.query.grade);
+
+    //if (req.query.section === "all")
 
     //let section = req.query.section;
     
@@ -115,7 +118,7 @@ function loadWS(req, res, next){
 
     if (req.query.section.trim() != "?" && req.query.grade != "?"){
         Worksheet.find()
-        .where("Description").regex(new RegExp(".*" + req.query.inputText + ".*", "i"))
+        .where("AllDescript").regex(new RegExp(".*" + req.query.inputText + ".*", "i"))
         .where("Section").equals(req.query.section.trim().toLowerCase())
         .where("Grade").equals(req.query.grade)
         
@@ -165,7 +168,7 @@ function loadWS(req, res, next){
         
     }else if(req.query.section.trim() != "?" && req.query.grade === "?"){
         Worksheet.find()
-        .where("Description").regex(new RegExp(".*" + req.query.inputText + ".*", "i"))
+        .where("AllDescript").regex(new RegExp(".*" + req.query.inputText + ".*", "i"))
         .where("Section").equals(req.query.section.trim().toLowerCase())
         
         .skip(startIndex)
@@ -192,7 +195,7 @@ function loadWS(req, res, next){
         console.log("hi");
         console.log(req.query.inputText);
         Worksheet.find()
-        .where("Description").regex(new RegExp(".*" + req.query.inputText + ".*", "i"))
+        .where("AllDescript").regex(new RegExp(".*" + req.query.inputText + ".*", "i"))
         .skip(startIndex)
         .limit(amount + 1)
         .exec(function(err, results){

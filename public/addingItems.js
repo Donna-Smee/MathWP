@@ -53,6 +53,7 @@ function checkValidInputWS(){
         alert("Grade should be a number value greater than 0.")
     }
 
+    let allDescript = title.toLowerCase() + " " + description.toLowerCase() + " " + grade.toLowerCase() + " " + section.toLowerCase();
 
     
     // check if the title exists yet (must be unique)
@@ -68,7 +69,8 @@ function checkValidInputWS(){
                     Description: description,
                     PreviewPic: imagePreview,
                     Grade: grade,
-                    Section: section
+                    Section: section,
+                    AllDescript: allDescript
                 }
                 sendSaveWSRequest(data);
                 return;
@@ -101,10 +103,16 @@ function sendSaveWSRequest(data){
             clearAllDOM();
             let result = document.getElementById("result");
             let a = document.createElement("a");
-            a.href = this.responseText;
-            let text = document.createTextNode(this.responseText);
+            
+            a.href = this.responseText.split("split here")[0];
+            let text = document.createTextNode((this.responseText.split("split here"))[0]);
+            let str = document.createTextNode((this.responseText.split("split here"))[1]);
+            
             a.appendChild(text); 
             result.appendChild(a);
+            result.appendChild(document.createElement("br"));
+            result.appendChild(str);
+
         }
     }
 

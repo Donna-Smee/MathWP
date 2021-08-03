@@ -96,6 +96,11 @@ app.get("/mc", function(req, res, next){
 });
 
 
+app.get("/contact", function(req, res, next){
+    res.render("../views/contact");
+})
+
+
 
 // gets the total number of items in cart
 function totCartItems(req, res, next){
