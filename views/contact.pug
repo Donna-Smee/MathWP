@@ -3,17 +3,27 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=w")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Contact Page
+        <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
+        style
+            include ../public/header.css
+            include ../public/contact.css
     body
-        h1 Talk to Us!
-        #contactForm 
-            label(for="name") Name 
-            input(type="text" name="name")
+        include ../partials/header
+        h1#contact-title Talk to Us!
+        <form id="contactForm" action="https://formsubmit.co/dailydosesofdonuts@gmail.com" method="POST">
+            #contact-container-1
+                input(type="text" name="name" placeholder="Name")
 
-            label(for="email") Email 
-            input(type="text" name="email") 
+                input.middle(type="text" name="email" placeholder="Your Email") 
 
-            label(for="message") Type your message here
-            input(type="text" name="message") 
+                input(type="text" name="_subject" placeholder="Subject")
+            textarea(type="text" name="message" rows="10" cols="50" placeholder="Type your message here")
+
+            button#send-button(type="submit") Send Email
+        </form>
+
+
+
         
