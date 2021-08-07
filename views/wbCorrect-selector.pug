@@ -5,7 +5,12 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title correction selector
-    body 
+        <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
+        style 
+            include ../public/header.css
+    body
+        include ../partials/header
+        
         div
             label(for="workbook-name") Enter the workbook name:  
             input(type="text" label="workbook-name" id="workbook-name")
