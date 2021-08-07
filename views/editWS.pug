@@ -1,0 +1,73 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Edit a Worksheet
+        style 
+            include ../public/editWS.css
+    body
+        h1 Alter/Change a Worksheet
+        input#title(type="text" placeholder="Enter a worksheet title to find")
+        button(onclick="checkExistTitle()") Find Worksheet
+        br
+        br
+
+        #changeWS
+            input.option(type="text" placeholder="Enter new worksheet title")
+            button.option Change Title
+            br
+            br
+            input.option(type="text" placeholder="Enter new section")
+            button.option Change Section Type
+            br
+            br
+
+            input.option(type="text" placeholder="Enter new preview pic")
+            button.option Change Preview Pic
+            br
+            br
+
+            input.option(type="number" placeholder="Enter pdf index to delete")
+            button.option Delete this pdf/Worksheet
+            br
+            br
+
+            br
+            br
+            button.option Delete All Worksheets (All PDFs)
+            br
+            br
+            br
+            br
+
+            input.option(type="text" placeholder="Add a pdf (a worksheet)")
+            button.option Add PDF
+            br
+            br
+
+            textarea.option(name="", cols="30", rows="10" placeholder="Enter a new short description")
+            button.option Change short description 
+            br
+            br
+
+            textarea.option(name="", cols="30", rows="10" placeholder="Change Description")
+            button.option Change description 
+            br
+            br
+
+            textarea.option(name="", cols="30", rows="10" placeholder="Change allDescription")
+            button.option Change allD 
+            br
+            br
+
+
+            br
+            br
+            a(href="/admin/home") Done
+            br
+            br
+
+    script 
+        include ../public/editWS.js

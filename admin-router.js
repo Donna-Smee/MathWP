@@ -32,9 +32,15 @@ router.post("/log/year", auth, loadLogYear);
 
 
 router.get("/loadWS", auth, openLoadWSPage);
+router.get("/editWS", auth, loadEditWSPage);
+
 
 router.get("/:sc",  loadAdminLoginPage);
 router.post("/saveLoadedWS", auth, loadInWorksheets);
+
+
+
+router.get("/editWS", auth, loadEditWSPage);
 
 
 
@@ -49,6 +55,7 @@ function loadAdminLoginPage(req, res, next){
 
 
 function auth(req, res, next){
+    console.log("checking");
     if (!req.session.loggedIn){
         res.status(401).send("Not logged in.");
         return;
@@ -490,6 +497,13 @@ function checkExistTitleLoading(title){
     });
 }
 
+
+
+
+function loadEditWSPage(req, res, next){
+    console.log("here");
+    res.status(200).render("../views/editWS");
+}
 
 
 
