@@ -57,6 +57,8 @@ function checkExistTitle(theChange){
                     removeAllPDF(lowerTitle);
                 }else if (theChange === "shortD" || theChange === "descript" || theChange === "allD"){
                     changeTheDescript(theChange, lowerTitle);
+                }else if (theChange === 'delWS'){
+                    deleteWS(lowerTitle);
                 }
                 
 
@@ -435,3 +437,44 @@ function changeTheDescript(descriptType, title){
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.send(JSON.stringify(data));
 }
+
+
+
+function deleteWS(title){
+    let data = {
+        "title": title
+    }
+    if (confirm("Do you really want to DELETE " + title + "?????")){
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+
+        if (this.readyState == 4 && this.status == 404 || this.status == 400 ||this.status == 500){
+            alert(xhttp.responseText);
+            return;
+        }
+
+        if (this.readyState == 4 && this.status == 200){
+            if (this.responseText === "true"){
+                alert(title + " has been DELETED");
+                
+
+            }else if (this.responseText === "false") {
+                alert("This title-worksheet does NOT exist.");
+                return;
+            }else {
+                document.open();
+                document.write(xhttp.responseText);
+                document.close();
+                return;
+            }
+        }
+    }
+    
+    xhttp.open("PUT", "/admin/delWS");
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.send(JSON.stringify(data));
+    }
+}
+
+
+

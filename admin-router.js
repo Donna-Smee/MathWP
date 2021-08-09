@@ -35,11 +35,15 @@ router.get("/loadWS", auth, openLoadWSPage);
 router.get("/editWS", auth, loadEditWSPage);
 
 
+// changes to product/workbooks
+router.get("/editPD", auth, loadEditPDPage);
+
+
 router.get("/:sc",  loadAdminLoginPage);
 router.post("/saveLoadedWS", auth, loadInWorksheets);
 
 
-
+// changes to worksheet
 router.get("/editWS", auth, loadEditWSPage);
 router.put("/changeTitle", auth, checkExistTitleToChange, changeTitle);
 router.put("/changeSection", auth, changeSection);
@@ -50,6 +54,11 @@ router.put("/removeAllPDF", auth, removeAllPDF);
 router.put("/shortDChange", auth, changeShortD);
 router.put("/descriptChange", auth, changeDescript);
 router.put("/allDChange", auth, changeAllD);
+router.put("/delWS", auth, deleteWorksheet);
+
+
+
+
 
 
 function loadAdminLoginPage(req, res, next){
@@ -507,8 +516,12 @@ function checkExistTitleLoading(title){
 
 
 function loadEditWSPage(req, res, next){
-    console.log("here");
     res.status(200).render("../views/editWS");
+}
+
+function loadEditPDPage(req, res, next){
+    console.log("im here here here 8");
+    res.status(200).render("../views/editPD");
 }
 
 /*
@@ -792,6 +805,26 @@ function changeAllD(req, res, next){
         }else {
             res.status(200).send("true");
             return;
+        }
+    });
+}
+
+
+
+function deleteWorksheet(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+
+    Worksheet.findOneAndDelete({LowerTitle: title}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't delete the worksheet.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find worksheet to delete.");
+            return;
+        }else {
+            res.status(200).send("true");
         }
     });
 }
