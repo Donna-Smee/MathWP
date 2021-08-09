@@ -247,7 +247,7 @@ function loadOneWS(req, res, next){
             return;
         }
         if (result != null){
-         
+            console.log("the worksheet: " + result);
             res.render("aWorksheet", {worksheet: result});
             res.end();
         }else {

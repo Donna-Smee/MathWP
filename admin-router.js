@@ -41,8 +41,15 @@ router.post("/saveLoadedWS", auth, loadInWorksheets);
 
 
 router.get("/editWS", auth, loadEditWSPage);
-
-
+router.put("/changeTitle", auth, checkExistTitleToChange, changeTitle);
+router.put("/changeSection", auth, changeSection);
+router.put("/changePreview", auth, changePreviewPic);
+router.put("/deletePDF", auth, findPDFToDelete, deletePDF);
+router.put("/addPDF", auth, checkPDF, addPDF);
+router.put("/removeAllPDF", auth, removeAllPDF);
+router.put("/shortDChange", auth, changeShortD);
+router.put("/descriptChange", auth, changeDescript);
+router.put("/allDChange", auth, changeAllD);
 
 
 function loadAdminLoginPage(req, res, next){
@@ -176,6 +183,9 @@ function checkExistTitle(req, res, next){
         }
     });
 }
+
+
+
 
 
 
@@ -328,8 +338,7 @@ function saveNewWB(req, res, next){
             res.status(500).send("Couldn't save the new workbook. Please try again.");
             return;
         }
-        console.log("saved: ");
-        console.log(result);
+        
         res.status(200).send("https://localhost:3000/workbooks/" + result._id.toString());
 
     });
@@ -483,14 +492,11 @@ function checkExistTitleLoading(title){
     Worksheet.findOne().where("LowerTitle").equals(title).exec(function(err, result){
         console.log("title checking for: " + title);
         if (err){
-            console.log("error checking title uh oh");
             return false;
         }
         if (result === null){
-            console.log("doesn't exist yet so GOOD");
             return false;
         }else {
-            console.log("Already exists.");
             return true;
             
         }
@@ -505,7 +511,288 @@ function loadEditWSPage(req, res, next){
     res.status(200).render("../views/editWS");
 }
 
+/*
+function checkExistTitle(req, res, next){
+    Worksheet.findOne().where("LowerTitle").equals(req.query.title).exec(function(err, result){
+        if (err){
+            res.status(500).send("There is a problem with checking the title availability.");
+            return;
+        }
+        if (result === null){
+            res.status(200).send("false");
+        }else {
+            res.status(200).send("true");
+        }
+    });
+}
+*/
+
+
+// checks to see if the new title is available
+// good to go (no title exists) = next()
+// title already exists => end
+function checkExistTitleToChange(req, res, next){
+    console.log("the old title: " + req.body["oldTitle"]);
+    console.log("the new title: " + req.body["newTitle"]);
+    let newT = req.body["newTitle"];
+
+    Worksheet.findOne().where("LowerTitle").equals(newT.toLowerCase().trim()).exec(function(err, result){
+        if (err){
+            res.status(500).send("There is a problem with checking the new title availability.");
+            return;
+        }
+        if (result === null){
+            next();
+        }else {
+            res.status(409).send("Title Already Exists");
+        }
+    });
+
+}
+
+
+function changeTitle(req, res, next){
+    let oldT = req.body["oldTitle"].trim().toLowerCase();
+    let newT = req.body["newTitle"].trim();
+    
+    Worksheet.findOneAndUpdate({LowerTitle: oldT}, {Title:newT, LowerTitle: newT.toLowerCase()}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the worksheet title.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Could not find the worksheet to update title.");
+            return;
+        }else {
+            
+            res.status(200).send("true");
+        }
+    });
+}
 
 
 
+function changeSection(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+    let newSect = req.body["section"].trim().toLowerCase();
+
+
+    Worksheet.findOneAndUpdate({LowerTitle: title}, {Section: newSect}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the worksheet section.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find the worksheet to update section.");
+            return;
+        }else {
+            res.status(200).send("true");
+        }
+    });
+}
+
+
+
+function changePreviewPic(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+    let previewPic = req.body["previewPic"].trim();
+
+
+    Worksheet.findOneAndUpdate({LowerTitle: title}, {PreviewPic: previewPic}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the worksheet preview picture.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find the worksheet to update preview picture.");
+            return;
+        }else {
+            res.status(200).send("true");
+        }
+    });
+}
+
+
+
+// using given index, find out if the index is valid for the PDF array
+// configure the new array after removing such element
+// if index is too high, end
+function findPDFToDelete(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+    let index = parseInt(req.body["index"]);
+
+    Worksheet.findOne().where("LowerTitle").equals(title).exec(function(err, result){
+        if (err){
+            res.status(500).send("There is a problem with getting the worksheet info.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Worksheet not found");
+            return;
+        }else {
+
+            if (index >= result.PDF.length){
+                res.status(400).send("Invalid index");
+                return;
+            }else {
+                let newArr = result.PDF;
+                newArr.splice(index, 1);
+               
+                res.newPDFArr = newArr;
+                next();
+            }
+        }
+    });
+}
+
+
+function deletePDF(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+
+    Worksheet.findOneAndUpdate({LowerTitle: title}, {PDF: res.newPDFArr}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the worksheet pdf array.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find the worksheet to update (delete 1) pdf array.");
+            return;
+        }else {
+            res.status(200).send("true");
+        }
+    });
+}
+
+
+// check if the given pdf link is already included in the worksheet's pdf array
+// if it's not included, next
+// if it is, end
+function checkPDF(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+    let pdf = req.body["pdf"].trim();
+
+    Worksheet.findOne().where("LowerTitle").equals(title).exec(function(err, result){
+        if (err){
+            res.status(500).send("Couldn't add new pdf to worksheet pdf array.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find the worksheet to add pdf link to.");
+            return;
+        }else {
+            let arr = result.PDF;
+            
+            if (arr.includes(pdf)){
+                res.status(400).send("This worksheet already contains this pdf.");
+                return;
+            }else {
+                
+                arr.push(pdf);
+                res.newArr = arr;
+                next();
+            }
+        }
+    })
+}
+
+
+function addPDF(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+
+    Worksheet.findOneAndUpdate({LowerTitle: title}, {PDF: res.newArr}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't add new pdf to worksheet pdf array - adding section.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't add new pdf to worksheet pdf array. Couldn't find worksheet.");
+            return;
+        }else {
+            res.status(200).send("true");
+            return;
+        }
+    });   
+}
+
+
+
+function removeAllPDF(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+
+    Worksheet.findOneAndUpdate({LowerTitle: title}, {PDF: []}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't remove all pdf from worksheet.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't remove all pdf from worksheet.");
+            return;
+        }else {
+            res.status(200).send("true");
+            return;
+        }
+    });
+}
+
+
+function changeShortD(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let newDescript = req.body["descript"];
+
+    Worksheet.findOneAndUpdate({LowerTitle: title}, {ShortD: newDescript}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the short description.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find worksheet to change short descript.");
+            return;
+        }else {
+            res.status(200).send("true");
+            return;
+        }
+    });
+}
+
+
+function changeDescript(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let newDescript = req.body["descript"];
+
+    Worksheet.findOneAndUpdate({LowerTitle: title}, {Description: newDescript}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the description.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find worksheet to change descript.");
+            return;
+        }else {
+            res.status(200).send("true");
+            return;
+        }
+    });
+}
+
+function changeAllD(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let newDescript = req.body["descript"];
+
+    Worksheet.findOneAndUpdate({LowerTitle: title}, {AllDescript: newDescript}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the all description.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find worksheet to change the all descript.");
+            return;
+        }else {
+            res.status(200).send("true");
+            return;
+        }
+    });
+}
 module.exports = router;

@@ -10,55 +10,61 @@ html(lang="en")
     body
         h1 Alter/Change a Worksheet
         input#title(type="text" placeholder="Enter a worksheet title to find")
-        button(onclick="checkExistTitle()") Find Worksheet
+        button(onclick="checkExistTitle('showOptions')") Find Worksheet
         br
         br
 
         #changeWS
-            input.option(type="text" placeholder="Enter new worksheet title")
-            button.option Change Title
+            input.option(id="newTitle" type="text" placeholder="Enter new worksheet title")
+            button.option(onclick="checkExistTitle('changeTitle')" id="newTitle") Change Title
             br
             br
-            input.option(type="text" placeholder="Enter new section")
-            button.option Change Section Type
-            br
-            br
-
-            input.option(type="text" placeholder="Enter new preview pic")
-            button.option Change Preview Pic
-            br
-            br
-
-            input.option(type="number" placeholder="Enter pdf index to delete")
-            button.option Delete this pdf/Worksheet
+            select.option(type="text" placeholder="Enter new section" id="newSection")
+                option(value="") Select a section
+                option(value="number") Number
+                option(value="algebra") Algebra 
+                option(value="data") Data 
+                option(value="spatial") Spatial Sense    
+                option(value="finance") Financial Literacy  
+            button.option(onclick="checkExistTitle('changeSection')") Change Section Type
             br
             br
 
+            input.option(type="text" placeholder="Enter new preview pic" id="newPP")
+            button.option(onclick="checkExistTitle('changePreviewPic')") Change Preview Pic
             br
             br
-            button.option Delete All Worksheets (All PDFs)
+
+            input.option(type="number" placeholder="Enter pdf index to delete" id="pdfIndex")
+            button.option(onclick="checkExistTitle('delPDF')") Delete this pdf/Worksheet
+            br
+            br
+
+            br
+            br
+            button.option(onclick="checkExistTitle('removeAllPDF')") Delete All Worksheets (All PDFs)
             br
             br
             br
             br
 
-            input.option(type="text" placeholder="Add a pdf (a worksheet)")
-            button.option Add PDF
+            input.option(type="text" placeholder="Add a pdf (a worksheet)" id="addPDFLink")
+            button.option(onclick="checkExistTitle('addPDF')") Add PDF
             br
             br
 
-            textarea.option(name="", cols="30", rows="10" placeholder="Enter a new short description")
-            button.option Change short description 
+            textarea.option(name="", cols="30", rows="10" placeholder="Enter a new short description" id="shortD")
+            button.option(onclick="checkExistTitle('shortD')") Change short description 
             br
             br
 
-            textarea.option(name="", cols="30", rows="10" placeholder="Change Description")
-            button.option Change description 
+            textarea.option(name="", cols="30", rows="10" placeholder="Change Description" id="descript")
+            button.option(onclick="checkExistTitle('descript')") Change description 
             br
             br
 
-            textarea.option(name="", cols="30", rows="10" placeholder="Change allDescription")
-            button.option Change allD 
+            textarea.option(name="", cols="30", rows="10" placeholder="Change allDescription" id="allD")
+            button.option(onclick="checkExistTitle('allD')") Change allD 
             br
             br
 
