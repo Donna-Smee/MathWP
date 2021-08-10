@@ -55,6 +55,8 @@ function checkInputs(){
 
 
     try {
+        console.log(previewPics);
+        console.log("these are the preview pics: "  +previewPics);
         PP = JSON.parse(previewPics);
     }catch{
         alert("Something is wrong with preview pics.");

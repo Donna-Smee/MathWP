@@ -37,6 +37,13 @@ router.get("/editWS", auth, loadEditWSPage);
 
 // changes to product/workbooks
 router.get("/editPD", auth, loadEditPDPage);
+router.get("/getWorkbook", auth, getWorkbook);
+router.put("/titleWbChange", auth, checkExistTitleToChangeWB, changeTitleWb);
+router.put("/subjectWbChange", auth, changeSubject);
+router.put("/shortDWbChange", auth, changeShortDWb);
+router.put("/descriptWbChange", auth, changeDescriptWb);
+router.put("/allDWbChange", auth, changeAllDWb);
+
 
 
 router.get("/:sc",  loadAdminLoginPage);
@@ -72,6 +79,7 @@ function loadAdminLoginPage(req, res, next){
 
 function auth(req, res, next){
     console.log("checking");
+    console.log("in auth: " + req.query.title);
     if (!req.session.loggedIn){
         res.status(401).send("Not logged in.");
         return;
@@ -199,6 +207,9 @@ function checkExistTitle(req, res, next){
 
 
 function checkExistTitleWB(req, res, next){
+    console.log("LOOOOL");
+    console.log("given: " + req.query.title);
+    console.log("LOOOOOL");
     Workbook.findOne().where("LowerTitle").equals(req.query.title).exec(function(err, result){
         if (err){
             res.status(500).send("There is a problem with checking the title availability.");
@@ -212,6 +223,21 @@ function checkExistTitleWB(req, res, next){
     });
 }
 
+
+function getWorkbook(req, res, next){
+    
+    Workbook.findOne().where("LowerTitle").equals(req.query.title).exec(function(err, result){
+        if (err){
+            res.status(500).send("There is a problem with getting the workbook.");
+            return;
+        }
+        if (result === null){
+            res.status(200).send("false");
+        }else {
+            res.status(200).send(result);
+        }
+    });
+}
 
 
 
@@ -348,6 +374,7 @@ function saveNewWB(req, res, next){
             return;
         }
         
+        console.log("newly saved wb: " + result);
         res.status(200).send("https://localhost:3000/workbooks/" + result._id.toString());
 
     });
@@ -564,6 +591,24 @@ function checkExistTitleToChange(req, res, next){
 }
 
 
+function checkExistTitleToChangeWB(req, res, next){
+  
+    let newT = req.body["text"];
+
+    Workbook.findOne().where("LowerTitle").equals(newT.toLowerCase().trim()).exec(function(err, result){
+        if (err){
+            res.status(500).send("There is a problem with checking the new title availability.");
+            return;
+        }
+        if (result === null){
+            next();
+        }else {
+            res.status(409).send("Title Already Exists");
+        }
+    });
+
+}
+
 function changeTitle(req, res, next){
     let oldT = req.body["oldTitle"].trim().toLowerCase();
     let newT = req.body["newTitle"].trim();
@@ -579,6 +624,26 @@ function changeTitle(req, res, next){
         }else {
             
             res.status(200).send("true");
+        }
+    });
+}
+
+
+function changeTitleWb(req, res, next){
+    let oldT = req.body["title"].trim().toLowerCase();
+    let newT = req.body["text"].trim();
+    
+    Workbook.findOneAndUpdate({LowerTitle: oldT}, {Title:newT, LowerTitle: newT.toLowerCase()}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the workbook title.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Could not find the workbook to update title.");
+            return;
+        }else {
+            
+            res.status(200).send("Workbook title updated.");
         }
     });
 }
@@ -604,6 +669,25 @@ function changeSection(req, res, next){
     });
 }
 
+
+function changeSubject(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+    let newSubj = req.body["text"].trim().toLowerCase();
+
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {Subject: newSubj}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the workbook subject.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find the workbook to update subject.");
+            return;
+        }else {
+            res.status(200).send("Workbook subject updated");
+        }
+    });
+}
 
 
 function changePreviewPic(req, res, next){
@@ -804,6 +888,69 @@ function changeAllD(req, res, next){
             return;
         }else {
             res.status(200).send("true");
+            return;
+        }
+    });
+}
+
+
+
+function changeShortDWb(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let newDescript = req.body["text"].trim();
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {ShortDescription: newDescript}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the short description.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find workbook to change short descript.");
+            return;
+        }else {
+            res.status(200).send("Short description changed.");
+            return;
+        }
+    });
+}
+
+
+function changeDescriptWb(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let newDescript = req.body["text"].trim();
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {Description: newDescript}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the description.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find workbook to change descript.");
+            return;
+        }else {
+            res.status(200).send("Description changed.");
+            return;
+        }
+    });
+}
+
+function changeAllDWb(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let newDescript = req.body["text"].trim();
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {AllDescript: newDescript}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the all description.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find workbook to change the all descript.");
+            return;
+        }else {
+            res.status(200).send("AllDescript changed.");
             return;
         }
     });

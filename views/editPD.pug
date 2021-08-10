@@ -1,0 +1,85 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Edit a Product
+        style 
+            include ../public/editPD.css
+    body
+        h1 Alter/Change a Product/Workbook
+        input#title(type="text" placeholder="Enter a product title to find")
+        button(onclick="checkExistTitleWB('showOptions')") Find Product
+        br
+        br
+
+        #productInfoContainer
+
+        br
+        br
+
+        #changeWS
+            input.option(id="titleVal" type="text" placeholder="Enter new product title")
+            button.option(onclick="checkExistTitleWB('title')") Change Title
+            br
+            br
+            input.option(type="text" placeholder="Enter new subject" id="subjectVal")
+            button.option(onclick="checkExistTitleWB('subject')") Change Subject Type
+            br
+            br
+
+            input.option(type="text" placeholder="Enter new preview pic" id="newPP")
+            button.option(onclick="checkExistTitle('changePreviewPic')") Change Preview Pic
+            br
+            br
+
+            input.option(type="number" placeholder="Enter pdf index to delete" id="pdfIndex")
+            button.option(onclick="checkExistTitle('delPDF')") Delete this pdf/Worksheet
+            br
+            br
+
+            br
+            br
+            button.option(onclick="checkExistTitle('removeAllPDF')") Delete All Worksheets (All PDFs)
+            br
+            br
+            br
+            br
+
+            input.option(type="text" placeholder="Add a pdf (a worksheet)" id="addPDFLink")
+            button.option(onclick="checkExistTitle('addPDF')") Add PDF
+            br
+            br
+
+            textarea.option(name="", cols="30", rows="10" placeholder="Enter a new short description" id="shortDVal")
+            button.option(onclick="checkExistTitleWB('shortD')") Change short description 
+            br
+            br
+
+            textarea.option(name="", cols="30", rows="10" placeholder="Change Description" id="descriptVal")
+            button.option(onclick="checkExistTitleWB('descript')") Change description 
+            br
+            br
+
+            textarea.option(name="", cols="30", rows="10" placeholder="Change allDescription" id="allDVal")
+            button.option(onclick="checkExistTitleWB('allD')") Change allD 
+            br
+            br
+
+
+            br
+            br
+            button.option(onclick="checkExistTitle('delWS')") DELETE ENTIRE WORKSHEET
+            br
+            br
+
+
+            br
+            br
+            a(href="/admin/home") Done
+            br
+            br
+    script 
+        include ../public/editPD.js
+        include ../public/editWS.js
