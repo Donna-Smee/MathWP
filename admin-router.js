@@ -46,6 +46,12 @@ router.put("/allDWbChange", auth, changeAllDWb);
 router.put("/addPreviewPicWbChange", auth, checkPreviewPics, addPreviewPic);
 router.put("/delPreviewPicWbChange", auth, findPreviewPicToDelete, deletePreviewPic);
 router.put("/removeAllPreviewPicsWbChange", auth, removeAllPreviewPicsWb);
+router.put("/priceWbChange", auth, changePrice);
+router.put("/gradesWbChange", auth, changeGrades);
+router.put("/formatWbChange", auth, changeFormat);
+router.put("/pageNumsWbChange", auth, changePageNums);
+router.put("/delPDWbChange", auth, deletePD);
+
 
 router.get("/:sc",  loadAdminLoginPage);
 router.post("/saveLoadedWS", auth, loadInWorksheets);
@@ -977,6 +983,23 @@ function deleteWorksheet(req, res, next){
     });
 }
 
+function deletePD(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+
+    Workbook.findOneAndDelete({LowerTitle: title}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't delete the workbook.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find workbook to delete.");
+            return;
+        }else {
+            res.status(200).send("Workbook " + title + " has been deleted.");
+        }
+    });
+}
 
 
 
@@ -1116,5 +1139,119 @@ function removeAllPreviewPicsWb(req, res, next){
         }
     });
 }
+
+
+// changes the price for the product/workbook
+function changePrice(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+
+    let price = req.body["text"];
+
+    if (!priceValid(price)){
+        res.status(400).send("Invalid price. Cannot change.");
+        return;
+    }
+
+    let priceF = parseFloat(price);
+
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {Price: priceF}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change price for workbook: " + title);
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't change price for workbook. Could not find workbook: " + title);
+            return;
+        }else {
+            res.status(200).send("Price has been changed for workbook:  " + title );
+            return;
+        }
+    });
+    
+
+
+}
+
+// helper function
+// checks if the price given is valid
+function priceValid(price){
+    if (isNaN(price)){
+		return false;
+	}
+
+	if (parseFloat(price) < 0){
+		return false;
+	}
+    return true;
+}
+
+
+
+function changeGrades(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let grades = req.body["text"];
+     
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {Grade: grades}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change grades for workbook: " + title);
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't change grades for workbook. Could not find workbook: " + title);
+            return;
+        }else {
+            res.status(200).send("Grades has been changed for workbook:  " + title );
+            return;
+        }
+    });
+}
+
+
+function changeFormat(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let format = req.body["text"];
+     
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {Format: format}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change format for workbook: " + title);
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't change format for workbook. Could not find workbook: " + title);
+            return;
+        }else {
+            res.status(200).send("Format has been changed for workbook:  " + title );
+            return;
+        }
+    });
+}
+
+function changePageNums(req, res, next){
+
+    let title = req.body["title"].trim().toLowerCase();
+    let pageNums = req.body["text"];
+     
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {PageNumbers: pageNums}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change pageNums for workbook: " + title);
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't change pageNums for workbook. Could not find workbook: " + title);
+            return;
+        }else {
+            res.status(200).send("PageNumbers has been changed for workbook:  " + title );
+            return;
+        }
+    });
+}
+
+
 
 module.exports = router;

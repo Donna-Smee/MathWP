@@ -54,7 +54,7 @@ function checkExistTitleWB(theChange){
                 clearWorkbookInfo();
                 showWorkbook(this.responseText);
 
-                if (theChange === "title" || theChange === "subject" || theChange === "shortD" || theChange === "descript" || theChange === "allD" || theChange === "addPreviewPic" || theChange === "delPreviewPic" || theChange === "removeAllPreviewPics"){
+                if (theChange === "title" || theChange === "subject" || theChange === "shortD" || theChange === "descript" || theChange === "allD" || theChange === "addPreviewPic" || theChange === "delPreviewPic" || theChange === "removeAllPreviewPics" || theChange === "price" || theChange === "grades" || theChange === "format" || theChange === "pageNums" || theChange === "delPD"){
                     updateText(title, theChange);
                 }
             }
@@ -96,6 +96,31 @@ function updateText(title, type){
         }
     }
     
+
+    if (type === "grades"){
+        if (!validGrades(text)){
+            alert("Something is wrong with grades. Ensure it is numbers separated by commas.");
+            return;
+        }
+    }
+
+
+    if (type === "format" || type === "pageNums"){
+        if (!validNumArray(text)){
+            alert("invalid array for " + type);
+            return;
+        }else {
+            text = JSON.parse(text);
+        }
+    }
+
+    if (type === "delPD"){
+        if (!confirm("DO YOU REALLY WANT TO DELETE THE PRODUCT: " + title)){
+            alert("Okay, nothing is deleted.");
+            return;
+        }
+    }
+
 
     let data = {
         "title": title.trim().toLowerCase(),
@@ -170,3 +195,53 @@ function priceValid(price){
 	console.log("Price is okay!");
     return true;
 }
+
+
+function validGrades(grades){
+    let graDes;
+    try {
+        //console.log("grades: " + grade);
+        graDes = grades.split(',');
+
+        for (let i = 0; i < graDes.length; i++){
+            if (isNaN(graDes[i]) || graDes[i] === ""){
+                alert("all elements of grades must be numbers (comma separated).");
+                return false;
+            }
+        }
+
+        console.log(graDes);
+    }catch{
+        alert("Something is not right with the grades.");
+        return false;
+    }
+
+    return true;
+}
+
+
+// checks if the given array consists of only numbers
+function validNumArray(arr) {
+
+    let arrayTest;
+
+    try {
+        arrayTest = JSON.parse(arr);
+        
+        for (let i = 0; i < arrayTest.length; i++){
+            if (isNaN(arrayTest[i])){
+                alert("all elements of array must be numbers.");
+                return false;
+            }
+        }
+        
+    }catch{
+        alert("Something is wrong with array.");
+        return false;
+    }
+    return true;
+}
+
+
+
+

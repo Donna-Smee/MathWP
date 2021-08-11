@@ -29,10 +29,6 @@ html(lang="en")
             br
             br
 
-            input.option(type="text" placeholder="Enter new preview pic" id="newPP")
-            button.option(onclick="checkExistTitle('changePreviewPic')") Change Preview Pic
-            br
-            br
 
             input.option(type="number" placeholder="Enter preview pic index to delete" id="delPreviewPicVal")
             button.option(onclick="checkExistTitleWB('delPreviewPic')") Delete this preview pic
@@ -52,6 +48,36 @@ html(lang="en")
             br
             br
 
+            br
+            br
+            input.option(type="number" placeholder="Enter new price. Two decimal places please." id="priceVal")
+            button.option(onclick="checkExistTitleWB('price')") Change Price
+            br
+            br
+
+            br
+            br
+            input.option(type="text" placeholder="Enter new grades. Separated by commas." id="gradesVal")
+            button.option(onclick="checkExistTitleWB('grades')") Change Grades
+            br
+            br
+
+            br
+            br
+            input.option(type="text" placeholder="Enter new format. Enter as an array." id="formatVal")
+            button.option(onclick="checkExistTitleWB('format')") Change Format
+            br
+            br
+
+
+            br
+            br
+            input.option(type="text" placeholder="Enter new pageNums. Enter as an array." id="pageNumsVal")
+            button.option(onclick="checkExistTitleWB('pageNums')") Change pageNums
+            br
+            br
+            
+
             textarea.option(name="", cols="30", rows="10" placeholder="Enter a new short description" id="shortDVal")
             button.option(onclick="checkExistTitleWB('shortD')") Change short description 
             br
@@ -70,7 +96,7 @@ html(lang="en")
 
             br
             br
-            button.option(onclick="checkExistTitle('delWS')") DELETE ENTIRE WORKSHEET
+            button.option(onclick="checkExistTitleWB('delPD')" id="delPDVal" value="none") DELETE ENTIRE PRODUCT
             br
             br
 
