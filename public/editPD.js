@@ -37,7 +37,7 @@ function checkExistTitleWB(theChange){
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
 
-        if (this.readyState == 4 && this.status == 409){
+        if (this.readyState == 4 && this.status == 409 || this.status == 400 || this.status == 404){
             alert(xhttp.responseText);
             return;
         }
@@ -54,7 +54,7 @@ function checkExistTitleWB(theChange){
                 clearWorkbookInfo();
                 showWorkbook(this.responseText);
 
-                if (theChange === "title" || theChange === "subject" || theChange === "shortD" || theChange === "descript" || theChange === "allD"){
+                if (theChange === "title" || theChange === "subject" || theChange === "shortD" || theChange === "descript" || theChange === "allD" || theChange === "addPreviewPic" || theChange === "delPreviewPic" || theChange === "removeAllPreviewPics"){
                     updateText(title, theChange);
                 }
             }
@@ -76,9 +76,24 @@ function updateText(title, type){
 
     let text = document.getElementById(type + "Val").value.trim();
 
+    
     if (text === "" || text === null){
         alert("You must include some input for " + type);
         return;
+    }
+
+    if (type === "delPreviewPic"){
+        // check if it's a valid index
+        if (!checkValidIndex(text)){
+            return;
+        }
+    }
+
+    if (type === "price"){
+        if (!priceValid(text)){
+            alert("Not a valid price.");
+            return;
+        }
     }
     
 
@@ -91,7 +106,7 @@ function updateText(title, type){
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(){
 
-        if (this.readyState == 4 && this.status == 409 || this.status == 404 || this.status == 500){
+        if (this.readyState == 4 && this.status == 409 || this.status == 404 || this.status == 500 || this.status == 400){
             alert(xhttp.responseText);
             return;
         }
@@ -109,3 +124,49 @@ function updateText(title, type){
 }
 
 
+function checkValidIndex(index){
+    if (index === "" || index === null){
+        alert("You have to enter a index for the pdf to delete.");
+        return false;
+    }
+
+    if (isNaN(index)){
+        alert("You have to enter a number value.");
+        return false;
+    }
+
+    if (index < 0){
+        alert("You have to enter an index 0 or up.");
+        return false;
+    }
+
+    try {
+        index = parseInt(index);
+    }
+    catch{
+        alert("You have to enter an integer.");
+        return false;
+    }
+
+    return true;
+}
+
+
+
+// price has to be a number
+// price has to be 0 or greaterx
+// return false if not
+function priceValid(price){
+    if (isNaN(price)){
+		console.log("No. Must be a number.");
+		return false;
+	}
+
+	if (price < 0){
+		console.log("No. Must be 0 or positive");
+		return false;
+	}
+
+	console.log("Price is okay!");
+    return true;
+}

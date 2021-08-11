@@ -34,21 +34,21 @@ html(lang="en")
             br
             br
 
-            input.option(type="number" placeholder="Enter pdf index to delete" id="pdfIndex")
-            button.option(onclick="checkExistTitle('delPDF')") Delete this pdf/Worksheet
+            input.option(type="number" placeholder="Enter preview pic index to delete" id="delPreviewPicVal")
+            button.option(onclick="checkExistTitleWB('delPreviewPic')") Delete this preview pic
             br
             br
 
             br
             br
-            button.option(onclick="checkExistTitle('removeAllPDF')") Delete All Worksheets (All PDFs)
+            button.option(onclick="checkExistTitleWB('removeAllPreviewPics')" id="removeAllPreviewPicsVal" value="none") Delete All preview pics.
             br
             br
             br
             br
 
-            input.option(type="text" placeholder="Add a pdf (a worksheet)" id="addPDFLink")
-            button.option(onclick="checkExistTitle('addPDF')") Add PDF
+            input.option(type="text" placeholder="Add a preview pic" id="addPreviewPicVal")
+            button.option(onclick="checkExistTitleWB('addPreviewPic')") Add Preview Pic
             br
             br
 

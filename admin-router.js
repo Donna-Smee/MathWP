@@ -43,8 +43,9 @@ router.put("/subjectWbChange", auth, changeSubject);
 router.put("/shortDWbChange", auth, changeShortDWb);
 router.put("/descriptWbChange", auth, changeDescriptWb);
 router.put("/allDWbChange", auth, changeAllDWb);
-
-
+router.put("/addPreviewPicWbChange", auth, checkPreviewPics, addPreviewPic);
+router.put("/delPreviewPicWbChange", auth, findPreviewPicToDelete, deletePreviewPic);
+router.put("/removeAllPreviewPicsWbChange", auth, removeAllPreviewPicsWb);
 
 router.get("/:sc",  loadAdminLoginPage);
 router.post("/saveLoadedWS", auth, loadInWorksheets);
@@ -975,4 +976,145 @@ function deleteWorksheet(req, res, next){
         }
     });
 }
+
+
+
+
+
+
+
+
+
+
+// check if the given pdf link is already included in the worksheet's pdf array
+// if it's not included, next
+// if it is, end
+function checkPreviewPics(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+    let pic = req.body["text"].trim();
+
+    Workbook.findOne().where("LowerTitle").equals(title).exec(function(err, result){
+        if (err){
+            res.status(500).send("Couldn't check preview pic in workbook.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find workbook: " + title + " to check for new preview pic addition.");
+            return;
+        }else {
+            let arr = result.PreviewPics;
+            
+            if (arr.includes(pic)){
+                res.status(400).send("This workbook preview pics already contains this picture.");
+                return;
+            }else {
+                
+                arr.push(pic);
+                res.newArr = arr;
+                next();
+            }
+        }
+    })
+}
+
+
+
+// adds one given preview pic to wb preview pic array
+function addPreviewPic(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {PreviewPics: res.newArr}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't add new preview pic to workbook preview pic array - adding section.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find workbook to add new preview pic.");
+            return;
+        }else {
+            res.status(200).send("New preview pic added.");
+            return;
+        }
+    });   
+}
+
+
+
+function findPreviewPicToDelete(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+    let index;
+    try {
+        index = parseInt(req.body["text"]);
+    }catch{
+        res.status(400).send("The index is invalid for PreviewPics. (Not an integer)");
+        return;
+    }
+
+    console.log("the index: " + index);
+
+
+    Workbook.findOne().where("LowerTitle").equals(title).exec(function(err, result){
+        if (err){
+            res.status(500).send("There is a problem with getting the workbook info.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Workbook not found");
+            return;
+        }else {
+            if (index >= result.PreviewPics.length || index < 0){
+                res.status(400).send("Invalid index.");
+                return;
+            }else {
+                let newArr = result.PreviewPics;
+                console.log("preview pics before: " + newArr);
+                newArr.splice(index, 1);
+
+
+               
+                res.newPPArr = newArr;
+                next();
+            }
+        }
+    });
+}
+
+
+function deletePreviewPic(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {PreviewPics: res.newPPArr}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't change the workbook previewpic array.");
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't find the workbook to update (delete 1) preview pics array.");
+            return;
+        }else {
+            res.status(200).send("The preview pic is removed.");
+        }
+    });
+}
+
+
+
+function removeAllPreviewPicsWb(req, res, next){
+    let title = req.body["title"].trim().toLowerCase();
+
+    Workbook.findOneAndUpdate({LowerTitle: title}, {PreviewPics: []}, function(err, result){
+        if (err){
+            res.status(500).send("Couldn't remove all preview pics from workbook: " + title);
+            return;
+        }
+        if (result === null){
+            res.status(404).send("Couldn't remove all preview pics from workbook. Could not find workbook: " + title);
+            return;
+        }else {
+            res.status(200).send("All preview pics from " + title + " are removed.");
+            return;
+        }
+    });
+}
+
 module.exports = router;
