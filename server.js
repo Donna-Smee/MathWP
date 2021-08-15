@@ -67,6 +67,10 @@ app.get("/generalMathWS", function(req, res, next){
 });
 
 
+app.get("/about-us", function(req, res, next){
+    res.render("../views/about");
+});
+
 
 // individual grade page
 app.get("/gradePage/:grade", function(req, res, next){
