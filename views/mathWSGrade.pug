@@ -12,6 +12,7 @@ html(lang="en")
             
             include ../public/header.css
             include ../public/mathWSGrade.css
+            include ../public/footer.css
     body 
         include ../partials/header
         include ../partials/searchBar
@@ -28,10 +29,12 @@ html(lang="en")
                 p Algebra 
             div(onclick="getWorkSheets('data')" value=grade)#data 
                 p Data 
-            div(onclick="getWorkSheets('spacial')" value=grade)#spacial 
-                p Spatial Sense 
+            div(onclick="getWorkSheets('spatial')" value=grade)#spatial 
+                p Spatial Sense
             div(onclick="getWorkSheets('finance')" value=grade)#finance 
                 p Financial Literacy 
+
+        include ../partials/footer
 
         script 
             include ../public/gettingWorksheets.js

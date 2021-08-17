@@ -12,9 +12,11 @@ html(lang="en")
         style
             include ../public/aWorksheet.css
             include ../public/header.css
+            include ../public/footer.css
     body 
         include ../partials/header
         include ../partials/searchBar
+        
  
         if worksheet === null 
             p Worksheet cannot be found.
@@ -32,11 +34,11 @@ html(lang="en")
             div#info-ws-buttons    
                 - let counter = 1
                 each link in worksheet.PDF 
-                    a(id="but-" + worksheet.Section href=link)= "Worksheet " + counter
+                    a(id="but-" + worksheet.Section href=link target="_blank")= "Worksheet " + counter
                     - counter++
                 
            
-
+        include ../partials/footer
 
         script 
             include ../public/gettingWorksheets.js

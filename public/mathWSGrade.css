@@ -38,7 +38,7 @@ body {
     background-color: #fee440;
 }
 
-#spacial {
+#spatial {
     flex: 1;
     background-color: #00bbf9;
 }
@@ -84,7 +84,7 @@ body {
    /* background-color: #e4c601;*/
 }
 
-#spacial:hover {
+#spatial:hover {
     cursor: pointer;
    /* background-color: #0099cc;*/
 }

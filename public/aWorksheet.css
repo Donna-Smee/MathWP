@@ -35,7 +35,7 @@ body {
 
 #description {
     margin: 1em;
-    max-height: 500px;
+    height: fit-content;
     
 }
 
@@ -51,7 +51,7 @@ body {
     background-color: #fee440;
 }
 
-#but-spacial {
+#but-spatial {
     background-color: #00bbf9;
 }
 
@@ -79,13 +79,29 @@ body {
     padding: 1em 0.4em;
 }
 
+
+
+/*do the following hover color effect for the rest of the sections later^*/
+
+#but-number:hover {
+    background-color: #8953cc;
+}
+
 #but-algebra:hover{
     background-color: #e23b9f;
 }
 
-/*do the following hover color effect for the rest of the sections later^*/
+#but-data:hover {
+    background-color: #d3bd32;
+}
 
+#but-spatial:hover {
+    background-color: #039bce;
+}
 
+#but-finance:hover {
+    background-color: #03d8bc;
+}
 
 
 

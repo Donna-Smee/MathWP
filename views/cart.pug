@@ -18,6 +18,7 @@ html(lang="en")
             include ../public/header.css
             include ../public/product.css
             include ../public/cart.css
+            include ../public/footer.css
             
     body 
 
@@ -79,7 +80,8 @@ html(lang="en")
 
                 #coupon 
                     input#promoInput(type="text" placeholder="Promo code")
-                    button#promoBut Apply 
+                    button#promoBut Apply
+        include ../partials/footer
 
     script
         include ../public/product-cart.js

@@ -13,6 +13,7 @@ html(lang="en")
             
             include ../public/worksheetTypes.css
             include ../public/navButtons.css
+            include ../public/footer.css
     body 
         include ../partials/header
 
@@ -49,6 +50,8 @@ html(lang="en")
                     - if(qstring.length > 0){ url += "&" + qstring; }
                     a(href=url)#nextBut Next
                     a(class="fa fa-arrow-right" id="nextButIcon" href=url)
+        
+        include ../partials/footer
         
         script 
             include ../public/gettingWorksheets.js

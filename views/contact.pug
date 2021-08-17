@@ -9,6 +9,7 @@ html(lang="en")
         style
             include ../public/header.css
             include ../public/contact.css
+            include ../public/footer.css
     body
         include ../partials/header
         h1#contact-title Talk to Us!
@@ -22,7 +23,10 @@ html(lang="en")
             textarea(type="text" name="message" rows="10" cols="50" placeholder="Type your message here")
 
             button#send-button(type="submit") Send Email
+        
+        
         </form>
+        include ../partials/footer
 
 
 
