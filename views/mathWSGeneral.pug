@@ -8,12 +8,15 @@ html(lang="en")
         <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
         <link rel="stylesheet", href="https://fonts.googleapis.com/css?family=Quicksand:300,500" type="text/css">
         style
-            
+            include ../public/footer.css
             include ../public/header.css
             include ../public/mathWSGeneral.css
-            include ../public/footer.css
-    body 
+
+    header
         include ../partials/header
+
+    body 
+        
         include ../partials/searchBar
 
         #grades 
@@ -27,10 +30,12 @@ html(lang="en")
         #wb 
             //p buy this math wb!
             //<a href="https://google.com"><img src="https://i.ibb.co/0XpRyfy/before-first-uni-exam-422.jpg" alt="before-first-uni-exam-422" border="0"></a><br /><a target='_blank' href='https://usefulwebtool.com/'></a><br />
-        
+    
+    footer
         include ../partials/footer
-        script 
-            include ../public/gettingWorksheets.js
+
+    script 
+        include ../public/gettingWorksheets.js
 
 
         

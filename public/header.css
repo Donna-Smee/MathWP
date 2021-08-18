@@ -14,9 +14,10 @@
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
     font-weight: 500;
-    font-size: 4vw;
+    font-size: 3vw;
     display: flex;
     flex-direction: row;
+
     
 }
 
@@ -31,7 +32,7 @@
 
 #header > a {
     margin: auto 0;
-    font-size: 1.8vw;
+    font-size: 1.4vw;
     padding: 1em;
     font-family: 'Oswald', sans-serif;
     text-transform: uppercase;
