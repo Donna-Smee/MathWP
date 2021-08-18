@@ -20,9 +20,10 @@ html(lang="en")
             include ../public/workbook-searchBar.css
             include ../public/navButtons.css
             include ../public/footer.css
-            
+
+    header
+        include ../partials/header  
     body 
-        include ../partials/header
         // the search bar
         
         if (totCart === null)
@@ -66,7 +67,7 @@ html(lang="en")
                 - if(qstring.length > 0){ url += "&" + qstring; }
                 a(href=url)#nextBut Next
                 a(class="fa fa-arrow-right" id="nextButIcon" href=url)
-
+    footer
         include ../partials/footer        
   
 

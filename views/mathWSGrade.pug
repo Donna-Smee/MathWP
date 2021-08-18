@@ -13,8 +13,9 @@ html(lang="en")
             include ../public/header.css
             include ../public/mathWSGrade.css
             include ../public/footer.css
-    body 
+    header
         include ../partials/header
+    body 
         include ../partials/searchBar
 
         h2#gradeTitle= "Math Worksheets 📝 Grade " + grade 
@@ -33,7 +34,7 @@ html(lang="en")
                 p Spatial Sense
             div(onclick="getWorkSheets('finance')" value=grade)#finance 
                 p Financial Literacy 
-
+    footer
         include ../partials/footer
 
         script 

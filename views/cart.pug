@@ -19,10 +19,9 @@ html(lang="en")
             include ../public/product.css
             include ../public/cart.css
             include ../public/footer.css
-            
-    body 
-
+    header
         include ../partials/header
+    body 
 
 
         if (totCart === null)
@@ -81,6 +80,7 @@ html(lang="en")
                 #coupon 
                     input#promoInput(type="text" placeholder="Promo code")
                     button#promoBut Apply
+    footer
         include ../partials/footer
 
     script

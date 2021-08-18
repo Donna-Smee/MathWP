@@ -8,8 +8,10 @@ html(lang="en")
         <link href='https://fonts.googleapis.com/css?family=Cardo:400,700|Oswald' rel='stylesheet' type='text/css'>
         style 
             include ../public/header.css
-    body
+            include ../public/footer.css
+    header
         include ../partials/header
+    body
         
         div
             label(for="workbook-name") Enter the workbook name:  
@@ -28,4 +30,7 @@ html(lang="en")
 
         script 
             include ../public/correction.js
+    
+    footer
+        include ../partials/footer
             

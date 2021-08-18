@@ -13,8 +13,10 @@ html(lang="en")
             include ../public/aWorksheet.css
             include ../public/header.css
             include ../public/footer.css
-    body 
+    header
         include ../partials/header
+
+    body 
         include ../partials/searchBar
         
  
@@ -37,7 +39,7 @@ html(lang="en")
                     a(id="but-" + worksheet.Section href=link target="_blank")= "Worksheet " + counter
                     - counter++
                 
-           
+    footer   
         include ../partials/footer
 
         script 
