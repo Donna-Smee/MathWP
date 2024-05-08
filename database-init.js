@@ -9,8 +9,10 @@ const fs = require("fs");
 
 const possChar = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+const mongodbURL = "mongodb+srv://root:root@elimsnowlearning.40yonrg.mongodb.net/?retryWrites=true&w=majority&appName=ElimsnowLearning";
 
-mongoose.connect('mongodb://localhost/eeWB', {useNewUrlParser: true});
+
+mongoose.connect(mongodbURL, {useNewUrlParser: true});
 let db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
